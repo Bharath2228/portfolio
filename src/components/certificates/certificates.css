@@ -1,0 +1,119 @@
+.certificates__container {
+    grid-template-columns: repeat(3, 270px);
+    justify-content: center;
+    column-gap: 1.8rem;
+}
+
+.certificate__panel {
+    max-width: 24rem; /* 384px */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: var(--container-color); /* Corrected "val" to "var" */
+    border-radius: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Ensures the button is at the bottom */
+    padding-bottom: 1rem; /* Optional: Adds padding around content */
+}
+
+.certificate__img {
+    border-radius: 1.25rem 1.25rem 0 0;
+    max-width: 100%;
+    height: auto; /* Ensures image is responsive */
+}
+
+.certificate__title {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    color: var(--title-color);
+}
+
+.certificate__description {
+    font-size: 0.75rem;
+}
+
+.certificate_title_btn{
+    position: relative;
+    padding-left: 16px;
+}
+
+.view-more-container {
+    max-width: 24rem; /* 384px */
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: val(--container-color);
+    border-radius: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    background-image: url("https://theproductmanager.com/wp-content/uploads/sites/4/2022/05/PRD-Product-Analytics-Certification-featured-image-1200x630.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+  }
+  
+button {
+  border-radius: 4px;
+  background-color: #5ca1e1;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-size: 12px;
+  padding: 5px;
+  width: auto;
+  transition: all 0.5s;
+  cursor: pointer;
+  box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+}
+
+button{
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+button:after {
+  content: '»';
+  font-size: 18px;
+  position: absolute;
+  opacity: 0;  
+  top: -0.6px;
+  right: -20px;
+  transition: 0.5s;
+}
+
+button:hover{
+  padding-right: 24px;
+  padding-left: 8px;
+}
+
+button:hover:after {
+  opacity: 1;
+  right: 10px;
+}
+  
+
+.view-more-btn{
+    border-radius: 4px;
+    background-color: #2f3e4b;
+    border: none;
+    color: #fff;
+    text-align: center;
+    font-size: 18px;
+    padding: 8px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-bottom: 60px;
+    box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+.view-more-btn:hover{
+    transition: 0.5s;
+    padding-right: 24px;
+    padding-left: 24px;  
+    opacity: 1;
+    right: 10px;
+}
