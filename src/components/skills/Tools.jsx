@@ -9,23 +9,14 @@ export const Tools = () => {
                 <div className="skills__group">
 
                 <div className="skills__data">
-                        <i className='bx bx-badge-check' ></i>
+                        <i className='bx bx-badge-check'></i>
 
                         <div>
-                            <h3 className="skills__name">Cadence</h3>
+                            <h3 className="skills__name">Unity</h3>
                             <span className="skills__level">Intermediate</span>
                         </div>
                     </div>
                     
-                    <div className="skills__data">
-                        <i className='bx bx-badge-check'></i>
-
-                        <div>
-                            <h3 className="skills__name">Keil uVision</h3>
-                            <span className="skills__level">Intermediate</span>
-                        </div>
-                    </div>
-
                     <div className="skills__data">
                         <i className='bx bx-badge-check'></i>
 
@@ -36,10 +27,19 @@ export const Tools = () => {
                     </div>
 
                     <div className="skills__data">
+                        <i className='bx bx-badge-check'></i>
+
+                        <div>
+                            <h3 className="skills__name">VS Code</h3>
+                            <span className="skills__level">Intermediate</span>
+                        </div>
+                    </div>
+
+                    <div className="skills__data">
                         <i className='bx bx-badge-check' ></i>
 
                         <div>
-                            <h3 className="skills__name">Arduino</h3>
+                            <h3 className="skills__name">Webpack</h3>
                             <span className="skills__level">Intermediate</span>
                         </div>
                     </div>
@@ -50,7 +50,7 @@ export const Tools = () => {
                         <i className='bx bx-badge-check'></i>
 
                         <div>
-                            <h3 className="skills__name">Matlab</h3>
+                            <h3 className="skills__name">Adobe XD</h3>
                             <span className="skills__level">Intermediate</span>
                         </div>
                     </div>
@@ -60,7 +60,7 @@ export const Tools = () => {
                         <i className='bx bx-badge-check'></i>
 
                         <div>
-                            <h3 className="skills__name">LabView</h3>
+                            <h3 className="skills__name">Draw.io</h3>
                             <span className="skills__level">Intermediate</span>
                         </div>
                     </div>
@@ -69,7 +69,7 @@ export const Tools = () => {
                         <i className='bx bx-badge-check'></i>
 
                         <div>
-                            <h3 className="skills__name">Scilab</h3>
+                            <h3 className="skills__name">Sketch</h3>
                             <span className="skills__level">Intermediate</span>
                         </div>
                     </div>
@@ -78,8 +78,8 @@ export const Tools = () => {
                         <i className='bx bx-badge-check'></i>
 
                         <div>
-                            <h3 className="skills__name">Figma</h3>
-                            <span className="skills__level">Basic</span>
+                            <h3 className="skills__name">PyQt6</h3>
+                            <span className="skills__level">Intermediate</span>
                         </div>
                     </div>
                 </div>

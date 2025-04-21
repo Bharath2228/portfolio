@@ -1,7 +1,7 @@
 import React from 'react';
 import "./about.css";
 import AboutImg from "../../assets/Profile-Pic.png";
-// import CV from "../../assets/Bharath_Prakash_CV.pdf";
+import CV from "../../assets/Bharath_Prakash_CV.pdf";
 import { Info } from './Info';
 
 export const About = () => {
@@ -15,10 +15,10 @@ export const About = () => {
             <div className="about__data">
                 <Info />
 
-                {/* <p className="about__description">
-                I am a Full Stack Developer skilled in software development, database management, and modern web technologies. I focus on creating efficient, user-friendly solutions by integrating robust back-end logic with intuitive front-end designs.
-                </p> */}
-                {/* <a href={CV} target='_blank' rel="noreferrer" className="button button--flex">Download CV
+                <p className="about__description">
+                I’m a Software Developer and UI/UX Designer from Bengaluru, India, passionate about creating intuitive digital experiences with technologies like Figma, JavaScript, ReactJS, and TailwindCSS, and eager to enhance my skills through the Digital Media Master’s program at the University of Bremen.
+                </p>
+                <a href={CV} target='_blank' rel="noreferrer" className="button button--flex">Download CV
                     <svg
                     className="button__icon"
                     xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +44,7 @@ export const About = () => {
                     fill="var(--container-color)"
                     ></path>
                     </svg>
-                </a> */}
+                </a>
             </div>
         </div>
    </section> 

@@ -43,6 +43,7 @@
   .skills__name {
     font-size: var(--normal-font-size);
     font-weight: var(--font-medium);
+    width: 95px;
     line-height: 18px;
   }
   
