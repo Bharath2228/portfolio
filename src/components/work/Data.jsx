@@ -7,6 +7,8 @@ import Work6 from '../../assets/lifi.png'
 import Work7 from '../../assets/sis.png'
 import Work8 from '../../assets/e-code.png'
 import Work9 from '../../assets/phototherapy.png'
+import Work10 from '../../assets/dine-dash.jpg'
+import Work11 from '../../assets/Work11.jpg'
 
 export const projectsData = [
     {
@@ -26,6 +28,15 @@ export const projectsData = [
         demo: "yes",
         link: "https://film-vault.netlify.app/",
         github: "https://github.com/Bharath2228/filmvault"
+    },
+    {
+        id: 10,
+        image: Work10,
+        title: "DineDash",
+        category: "web",
+        demo: "yes",
+        link: "https://bharath2228.github.io/food-menu/",
+        github: "https://github.com/Bharath2228/food-menu"
     },
     {
         id: 3,
@@ -55,6 +66,13 @@ export const projectsData = [
         github: "https://github.com/Bharath2228/Web-Calculator"
     },
     {
+        id: 11,
+        image: Work11,
+        title: "Web Components",
+        category: "Web",
+        link: "https://github.com/Bharath2228/web-components-showcase"
+    },
+    {
         id: 6,
         image: Work6,
         title: "Data Transmission using Li-Fi",
@@ -81,7 +99,7 @@ export const projectsData = [
         title: "E-CoderShelf (Mock Server)",
         category: "Web",
         link: "https://github.com/Bharath2228/e-codershelf-mock-server"
-    }
+    },    
 ];
 
 export const projectsNav = [
