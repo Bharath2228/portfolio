@@ -35,8 +35,8 @@ export const projectsData = [
         title: "DineDash",
         category: "web",
         demo: "yes",
-        link: "https://bharath2228.github.io/food-menu/",
-        github: "https://github.com/Bharath2228/food-menu"
+        link: "https://bharath2228.github.io/dine-dash/",
+        github: "https://github.com/Bharath2228/dine-dash"
     },
     {
         id: 3,
