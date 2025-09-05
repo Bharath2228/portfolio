@@ -16,7 +16,10 @@ export const About = () => {
                 <Info />
 
                 <p className="about__description">
-                I’m a Software Developer and UI/UX Designer from Bengaluru, India, passionate about creating intuitive digital experiences with technologies like Figma, JavaScript, ReactJS, and TailwindCSS, and eager to enhance my skills through the Digital Media Master’s program at the University of Bremen.
+                Results-driven Software Engineer with 2+ years of experience in full-stack development and automation, specializing in
+                Python, C++, React.js, and JavaScript. Skilled in modernizing legacy systems, optimizing database performance, and
+                delivering cross-platform solutions using MySQL and MSSQL. Experienced in building dynamic web applications and
+                integrating robust backend services
                 </p>
                 <a href={CV} target='_blank' rel="noreferrer" className="button button--flex">Download CV
                     <svg
