@@ -47,6 +47,26 @@ export const Qualification = () => {
                         }
                     >
                         <div className="qualification__data">
+                            <div></div>
+
+                            <div>
+                                <span className="qualification__rounder"></span>
+                                <span className="qualification__line"></span>
+                            </div>
+
+                            <div>
+                                <h3 className="qualification__title">Master of Science</h3>
+                                {/* <span className="qualification__subtitle">Electrical and Computer Science Engineering</span> */}
+                                {/* <span className="qualification__subtitle">M. Sc. in Communication and Media Engineering</span> */}
+                                <span className="qualification__subtitle">Hochschule Offenburg</span>
+                                <span className="qualification__subtitle">Offenburg, Germany</span>
+                                <div className="qualification__calender">
+                                    <i className="uil uil-calendar-alt"></i> 2025 - Present
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="qualification__data">
                             <div className='data'>
                                 <h3 className="qualification__title">Bachelor of Engineering</h3>
                                 <span className="qualification__subtitle">Ramaiah Institute of Technology</span>
@@ -110,7 +130,7 @@ export const Qualification = () => {
                                 <span className="qualification__subtitle">Boeing India Private Limited</span>
                                 <span className="qualification__subtitle">Bengaluru, India </span>
                                 <div className="qualification__calender">
-                                    <i className="uil uil-calendar-alt"></i> 2023 - Present
+                                    <i className="uil uil-calendar-alt"></i> 2023 - 2025
                                 </div>
                             </div>
 
