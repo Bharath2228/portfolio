@@ -6,7 +6,7 @@
 
 .certificate__panel {
     max-width: 24rem; /* 384px */
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
     background-color: var(--container-color); /* Corrected "val" to "var" */
     border-radius: 1.25rem;
     display: flex;
@@ -38,7 +38,7 @@
 
 .view-more-container {
     max-width: 24rem; /* 384px */
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid var(--border-color);
     background-color: val(--container-color);
     border-radius: 1.25rem;
     display: flex;

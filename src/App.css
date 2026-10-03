@@ -5,15 +5,18 @@
 :root {
   --header-height: 3rem;
 
-  /*========== Colors ==========*/
-  /*Color mode HSL(hue, saturation, lightness)*/
-  --hue: 0;
-  --sat: 0%;
-  --title-color: hsl(var(--hue), var(--sat), 20%);
-  --title-color-dark: hsl(var(--hue), var(--sat), 0%);
-  --text-color: hsl(var(--hue), var(--sat), 46%);
-  --body-color: hsl(var(--hue), var(--sat), 98%);
-  --container-color: #fff;
+  /*========== Colors (light) ==========*/
+  /* One accent, neutrals otherwise. Text pairs pass WCAG AA on their backgrounds. */
+  --title-color: #1f2530;
+  --title-color-dark: #0b0f16;
+  --text-color: #4b5563;
+  --body-color: #fafafa;
+  --container-color: #ffffff;
+  --border-color: rgba(15, 23, 42, 0.12);
+  --accent: #1d4ed8;
+  --accent-hover: #1e40af;
+  --on-accent: #ffffff;
+  --shadow-color: rgba(15, 23, 42, 0.12);
 
   /*========== Font and typography ==========*/
   --body-font: "Poppins", sans-serif;
@@ -48,6 +51,39 @@
   --z-tooltip: 10;
   --z-fixed: 100;
   --z-modal: 1000;
+
+  color-scheme: light;
+}
+
+/*========== Dark mode (system default, manual override with data-theme) ==========*/
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --title-color: #f1f5f9;
+    --title-color-dark: #ffffff;
+    --text-color: #a7b0bf;
+    --body-color: #0b0f16;
+    --container-color: #141a24;
+    --border-color: rgba(148, 163, 184, 0.2);
+    --accent: #60a5fa;
+    --accent-hover: #93c5fd;
+    --on-accent: #0b0f16;
+    --shadow-color: rgba(0, 0, 0, 0.5);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --title-color: #f1f5f9;
+  --title-color-dark: #ffffff;
+  --text-color: #a7b0bf;
+  --body-color: #0b0f16;
+  --container-color: #141a24;
+  --border-color: rgba(148, 163, 184, 0.2);
+  --accent: #60a5fa;
+  --accent-hover: #93c5fd;
+  --on-accent: #0b0f16;
+  --shadow-color: rgba(0, 0, 0, 0.5);
+  color-scheme: dark;
 }
 
 /* Responsive typography */
@@ -115,18 +151,21 @@ img {
 
 /*=============== REUSABLE CSS CLASSES ===============*/
 .section {
-  padding: 6rem 0 2rem;
+  padding: 5rem 0 2rem;
 }
 
 .section__title {
   font-size: var(--h1-font-size);
   color: var(--title-color);
+  font-weight: var(--font-semi-bold);
+  letter-spacing: -0.01em;
 }
 
 .section__subtitle {
   display: block;
   font-size: var(--small-font-size);
-  margin-bottom: 4rem;
+  margin-top: 0.5rem;
+  margin-bottom: 3rem;
 }
 
 .section__title,
@@ -149,15 +188,29 @@ img {
 /*=============== BUTTONS ===============*/
 .button {
   display: inline-block;
-  background-color: var(--title-color);
-  color: var(--container-color);
+  background-color: var(--accent);
+  color: var(--on-accent);
   padding: 1.25rem 2rem;
   border-radius: 1rem;
   font-weight: var(--font-medium);
+  transition: background-color 0.3s, transform 0.2s;
 }
 
 .button:hover {
-  background-color: var(--title-color-dark);
+  background-color: var(--accent-hover);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.button:focus-visible,
+a:focus-visible,
+button:focus-visible,
+.nav__toggle:focus-visible,
+.nav__close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
 }
 
 .button__icon {

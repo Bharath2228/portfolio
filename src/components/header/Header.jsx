@@ -1,8 +1,37 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "./header.css";
+
+const readStoredTheme = () => {
+  try {
+    return localStorage.getItem("theme");
+  } catch {
+    return null;
+  }
+};
 
 export const Header = () => {
   const [toggle, setToggle] = useState(false);
+  const [theme, setTheme] = useState(readStoredTheme);
+
+  useEffect(() => {
+    if (theme) {
+      document.documentElement.dataset.theme = theme;
+    } else {
+      delete document.documentElement.dataset.theme;
+    }
+  }, [theme]);
+
+  const switchTheme = () => {
+    const systemDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const isDark = theme ? theme === "dark" : systemDark;
+    const next = isDark ? "light" : "dark";
+    setTheme(next);
+    try {
+      localStorage.setItem("theme", next);
+    } catch {
+      /* storage unavailable: the choice applies for this visit only */
+    }
+  };
 
   return (
     <header className="header">
@@ -50,8 +79,14 @@ export const Header = () => {
           <i className="uil uil-times nav__close" role="button" tabIndex={0} aria-label="Close menu" onClick={() => setToggle(!toggle)}></i>
         </div>
 
-        <div className="nav__toggle" role="button" tabIndex={0} aria-label="Open menu" onClick={() => setToggle(!toggle)}>
-          <i className="uil uil-apps" aria-hidden="true"></i>
+        <div className="nav__controls">
+          <button type="button" className="nav__theme" onClick={switchTheme} aria-label="Switch light and dark mode">
+            <i className={theme === "dark" ? "uil uil-sun" : "uil uil-moon"} aria-hidden="true"></i>
+          </button>
+
+          <div className="nav__toggle" role="button" tabIndex={0} aria-label="Open menu" onClick={() => setToggle(!toggle)}>
+            <i className="uil uil-apps" aria-hidden="true"></i>
+          </div>
         </div>
       </nav>
     </header>
