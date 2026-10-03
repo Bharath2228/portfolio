@@ -3,7 +3,6 @@ import "./home.css"
 import "./Social"
 import { Social } from './Social'
 import { Data } from './Data'
-import { ScrollDown } from './ScrollDown'
 
 export const Home = () => {
   return (
@@ -16,7 +15,6 @@ export const Home = () => {
 
                 <Data />
             </div>
-            <ScrollDown />
         </div>
     </section>
   )
