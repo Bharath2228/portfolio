@@ -69,7 +69,8 @@ export const Qualification = () => {
                         <div className="qualification__data">
                             <div className='data'>
                                 <h3 className="qualification__title">Bachelor of Engineering</h3>
-                                <span className="qualification__subtitle">Ramaiah Institute of Technology</span>
+                                <span className="qualification__subtitle">Electronics and Instrumentation Engineering</span>
+                                <span className="qualification__subtitle">M S Ramaiah Institute of Technology</span>
                                 <span className="qualification__subtitle">Bengaluru, India </span>
                                 <div className="qualification__calender">
                                     <i className="uil uil-calendar-alt"></i> 2019 - 2023
@@ -126,11 +127,68 @@ export const Qualification = () => {
                     >
                         <div className="qualification__data">
                             <div>
-                                <h3 className="qualification__title">Software Engineer - Developer</h3>
-                                <span className="qualification__subtitle">Boeing India Private Limited</span>
+                                <h3 className="qualification__title">Student Research Assistant - Robotics Software Engineer</h3>
+                                <span className="qualification__subtitle">Work-Life Robotics Institute, Offenburg</span>
+                                <span className="qualification__subtitle">Real-time ROS 2 control for a 7-DoF cobot, MoveIt 2 motion planning</span>
+                                <div className="qualification__calender">
+                                    <i className="uil uil-calendar-alt"></i> Mar 2026 - Present
+                                </div>
+                            </div>
+
+                            <div>
+                                <span className="qualification__rounder"></span>
+                                <span className="qualification__line"></span>
+                            </div>
+                        </div>
+
+                        <div className="qualification__data">
+                            <div></div>
+
+                            <div>
+                                <span className="qualification__rounder"></span>
+                                <span className="qualification__line"></span>
+                            </div>
+
+                            <div>
+                                <h3 className="qualification__title">Student Research Assistant - Software Engineer</h3>
+                                <span className="qualification__subtitle">Institute for Advanced Biomechanics and Motion Studies, Offenburg</span>
+                                <span className="qualification__subtitle">Storage Scout (PyQt6, SQLite), HDF5 sensor data schema</span>
+                                <div className="qualification__calender">
+                                    <i className="uil uil-calendar-alt"></i> Mar 2026 - Aug 2026
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="qualification__data">
+                            <div>
+                                <h3 className="qualification__title">Software Engineer II</h3>
+                                <span className="qualification__subtitle">Boeing | International Space Station Program</span>
                                 <span className="qualification__subtitle">Bengaluru, India </span>
                                 <div className="qualification__calender">
-                                    <i className="uil uil-calendar-alt"></i> 2023 - 2025
+                                    <i className="uil uil-calendar-alt"></i> Jun 2025 - Aug 2025
+                                </div>
+                            </div>
+
+                            <div>
+                                <span className="qualification__rounder"></span>
+                                <span className="qualification__line"></span>
+                            </div>
+                        </div>
+
+                        <div className="qualification__data">
+                            <div></div>
+
+                            <div>
+                                <span className="qualification__rounder"></span>
+                                <span className="qualification__line"></span>
+                            </div>
+
+                            <div>
+                                <h3 className="qualification__title">Software Engineer I</h3>
+                                <span className="qualification__subtitle">Boeing | International Space Station Program</span>
+                                <span className="qualification__subtitle">Bengaluru, India </span>
+                                <div className="qualification__calender">
+                                    <i className="uil uil-calendar-alt"></i> Aug 2023 - Jun 2025
                                 </div>
                             </div>
 

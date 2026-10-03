@@ -100,6 +100,24 @@ export const Frontend = () => {
                         </div>
                     </div>
 
+                    <div className="skills__data">
+                        <i className='bx bx-badge-check'></i>
+
+                        <div>
+                            <h3 className="skills__name">ROS 2 / MoveIt 2</h3>
+                            <span className="skills__level">Intermediate</span>
+                        </div>
+                    </div>
+
+                    <div className="skills__data">
+                        <i className='bx bx-badge-check'></i>
+
+                        <div>
+                            <h3 className="skills__name">OpenCV</h3>
+                            <span className="skills__level">Intermediate</span>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>

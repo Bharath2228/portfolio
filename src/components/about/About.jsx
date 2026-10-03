@@ -16,10 +16,10 @@ export const About = () => {
                 <Info />
 
                 <p className="about__description">
-                Results-driven Software Engineer with 2+ years of experience in full-stack development and automation, specializing in
-                Python, C++, React.js, and JavaScript. Skilled in modernizing legacy systems,database migration, optimizing database performance, and
-                delivering cross-platform solutions using MySQL and MSSQL. Experienced in building dynamic web applications and
-                integrating robust backend services.
+                Robotics software engineer with hands-on experience building real-time ROS 2 control stacks, hardware interfaces, and
+                motion-planning pipelines for industrial cobots, alongside full-stack systems engineering across desktop applications,
+                concurrent data pipelines, and embedded computer-vision prototypes. Currently pursuing an M.Sc. in Communication and
+                Media Engineering at Hochschule Offenburg.
                 </p>
 
                 <a href={CV} target="_blank" rel="noopener noreferrer" className="button button--flex">
