@@ -1,7 +1,7 @@
 import React from 'react';
 import "./about.css";
 import AboutImg from "../../assets/Profile-Pic.png";
-// import CV from "../../assets/Bharath_Prakash_CV.pdf";
+import CV from "../../assets/Bharath_Prakash_CV.pdf";
 import { Info } from './Info';
 
 export const About = () => {
@@ -21,6 +21,11 @@ export const About = () => {
                 delivering cross-platform solutions using MySQL and MSSQL. Experienced in building dynamic web applications and
                 integrating robust backend services.
                 </p>
+
+                <a href={CV} target="_blank" rel="noopener noreferrer" className="button button--flex">
+                  Download CV
+                  <i className="bx bx-download button__icon" aria-hidden="true"></i>
+                </a>
             </div>
         </div>
    </section> 

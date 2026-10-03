@@ -1,7 +1,7 @@
 .skills__container {
-    grid-template-columns: repeat(3, 350px);
-    column-gap: 3rem;
-    justify-content: center;
+    grid-template-columns: 1fr;
+    max-width: 720px;
+    row-gap: 1.5rem;
   }
   
   .skills__content {
@@ -19,15 +19,14 @@
   }
   
   .skills__box {
-    display: flex;
-    justify-content: center;
-    column-gap: 2.5rem;
-  }
-  
-  .skills__group {
     display: grid;
-    align-items: flex-start;
-    row-gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 1rem 1.5rem;
+  }
+
+  /* Groups dissolve into the box grid so items flow as one tidy set */
+  .skills__group {
+    display: contents;
   }
 
   
@@ -56,8 +55,7 @@
   /* For large devices */
   @media screen and (max-width: 992px) {
     .skills__container {
-      grid-template-columns: max-content;
-      row-gap: 2rem;
+      grid-template-columns: 1fr;
     }
   }
   
