@@ -3,7 +3,7 @@ import React from 'react'
 const WorkItems = ({ item }) => {
     return (
         <div className="work__card" key={item.id}>
-            <img src={item.image} alt="" className='work__img' />
+            <img src={item.image} alt={`Screenshot of ${item.title}`} className='work__img' />
             <h3 className="work__title">{item.title}</h3>
             <div className='link__data'>
                 <a href={item.link} target='_blank' rel='noreferrer' className="work__button">

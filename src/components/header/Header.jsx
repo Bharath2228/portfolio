@@ -47,11 +47,11 @@ export const Header = () => {
               </a>
             </li>
           </ul>
-          <i className="uil uil-times nav__close" onClick={() => setToggle(!toggle)}></i>
+          <i className="uil uil-times nav__close" role="button" tabIndex={0} aria-label="Close menu" onClick={() => setToggle(!toggle)}></i>
         </div>
 
-        <div className="nav__toggle" onClick={() => setToggle(!toggle)}>
-          <i className="uil uil-apps"></i>
+        <div className="nav__toggle" role="button" tabIndex={0} aria-label="Open menu" onClick={() => setToggle(!toggle)}>
+          <i className="uil uil-apps" aria-hidden="true"></i>
         </div>
       </nav>
     </header>

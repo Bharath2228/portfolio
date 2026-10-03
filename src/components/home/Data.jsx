@@ -54,7 +54,7 @@ export const Data = () => {
                   ></path>
         </svg>
         </h1>
-        <h3 className="home__subtitle">Master’s Student at Hochschule Offenburg</h3>
+        <h2 className="home__subtitle">Master’s Student at Hochschule Offenburg</h2>
         <p className="home__description">Full Stack Developer - Python | SQL | React.js | JavaScript | MSSQL | MySQL</p>
         <p className="home__description"> </p>
         <a href="https://github.com/Bharath2228" target='_blank' rel='noreferrer' className="button button--flex">GitHub 
