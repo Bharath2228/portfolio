@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import "./header.css";
 
+const links = [
+  { href: "#projects", label: "Projects" },
+  { href: "#about", label: "About" },
+  { href: "#experience", label: "Experience" },
+  { href: "#skills", label: "Skills" },
+  { href: "#certificates", label: "Certificates" },
+  { href: "#contact", label: "Contact" },
+];
+
 const readStoredTheme = () => {
   try {
     return localStorage.getItem("theme");
@@ -9,8 +18,8 @@ const readStoredTheme = () => {
   }
 };
 
-export const Header = () => {
-  const [toggle, setToggle] = useState(false);
+const Header = () => {
+  const [menuOpen, setMenuOpen] = useState(false);
   const [theme, setTheme] = useState(readStoredTheme);
 
   useEffect(() => {
@@ -35,60 +44,36 @@ export const Header = () => {
 
   return (
     <header className="header">
-      <nav className="nav container">
-        <a href="index.html" className="nav__logo">Bharath</a>
+      <nav className="nav container" aria-label="Main">
+        <a href="#top" className="nav__logo">Bharath Prakash</a>
 
-        <div className={toggle ? "nav__menu show-menu" : "nav__menu"}>
-          <ul className="nav__list grid">
-            <li className="nav__item">
-              <a href="#home" className="nav__link active-link">
-                <i className="uil uil-estate nav__icon"></i> Home
+        <ul className={`nav__list ${menuOpen ? "nav__list--open" : ""}`}>
+          {links.map((link) => (
+            <li key={link.href}>
+              <a href={link.href} className="nav__link" onClick={() => setMenuOpen(false)}>
+                {link.label}
               </a>
             </li>
-            <li className="nav__item">
-              <a href="#about" className="nav__link">
-                <i className="uil uil-user nav__icon"></i> About
-              </a>
-            </li>
-            <li className="nav__item">
-              <a href="#portfolio" className="nav__link">
-                <i className="uil uil-scenery nav__icon"></i> Qualification
-              </a>
-            </li>
-            <li className="nav__item">
-              <a href="#skills" className="nav__link">
-                <i className="uil uil-file-alt nav__icon"></i> Skills
-              </a>
-            </li>
-            <li className="nav__item">
-              <a href="#projects" className="nav__link">
-                <i className="uil uil-scenery nav__icon"></i> Projects
-              </a>
-            </li>
-            <li className="nav__item">
-              <a href="#certificates" className="nav__link">
-                <i className="uil uil-briefcase-alt nav__icon"></i> Certificates
-              </a>
-            </li>
-            <li className="nav__item">
-              <a href="#contact" className="nav__link">
-                <i className="uil uil-message nav__icon"></i> Contact
-              </a>
-            </li>
-          </ul>
-          <i className="uil uil-times nav__close" role="button" tabIndex={0} aria-label="Close menu" onClick={() => setToggle(!toggle)}></i>
-        </div>
+          ))}
+        </ul>
 
         <div className="nav__controls">
-          <button type="button" className="nav__theme" onClick={switchTheme} aria-label="Switch light and dark mode">
+          <button type="button" className="nav__icon-btn" onClick={switchTheme} aria-label="Switch light and dark mode">
             <i className={theme === "dark" ? "uil uil-sun" : "uil uil-moon"} aria-hidden="true"></i>
           </button>
-
-          <div className="nav__toggle" role="button" tabIndex={0} aria-label="Open menu" onClick={() => setToggle(!toggle)}>
-            <i className="uil uil-apps" aria-hidden="true"></i>
-          </div>
+          <button
+            type="button"
+            className="nav__icon-btn nav__menu-btn"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-expanded={menuOpen}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+          >
+            <i className={menuOpen ? "uil uil-times" : "uil uil-bars"} aria-hidden="true"></i>
+          </button>
         </div>
       </nav>
     </header>
   );
 };
+
+export default Header;

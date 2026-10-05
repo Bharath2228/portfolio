@@ -1,40 +1,27 @@
 import React from 'react';
-import './contact.css'
+import './contact-links.css'
 
 const Contact = () => {
-
     return (
-        <section className="contact section" id="contact">
-            <h2 className="section__title">Get in touch</h2>
-            <span className="section__subtitle">Contact Me</span>
+        <section className="section contact" id="contact">
+            <header className="section__head">
+                <h2 className="section__title">Get in touch</h2>
+                <p className="section__lead">Open to robotics and software engineering roles. Based in Offenburg, Germany.</p>
+            </header>
 
-            <div className="contact__container container grid">
-                <div className="contact__content">
-
-                    <div className="contact__info">
-                        <div className="contact__card">
-                            <i className="bx bx-mail-send contact__card-icon"></i>
-
-                            <h3 className="contact__card-title">Email</h3>
-                            <span className="contact__card-data">prakashbharath28@gmail.com</span>
-
-                            <a href="mailto:prakashbharath28@gmail.com" className="contact__button">
-                                Write me <i className='bx bx-right-arrow-alt contact__button-icon'></i>
-                            </a>
-                        </div>
-
-                        <div className="contact__card">
-                            <i className="bx bxl-linkedin contact__card-icon"></i>
-
-                            <h3 className="contact__card-title">Linkedin</h3>
-                            <span className="contact__card-data"><a href="https://www.linkedin.com/in/bharath-prakash-450596263/"> Bharath Prakash </a></span>
-
-                            <a href="https://www.linkedin.com/in/bharath-prakash-450596263/" className="contact__button">
-                                Connect <i className='bx bx-right-arrow-alt contact__button-icon'></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
+            <div className="container contact__links">
+                <a href="mailto:prakashbharath28@gmail.com" className="contact__link">
+                    <span className="contact__label">Email</span>
+                    <span className="contact__value">prakashbharath28@gmail.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/bharath-prakash-450596263/" target="_blank" rel="noreferrer" className="contact__link">
+                    <span className="contact__label">LinkedIn</span>
+                    <span className="contact__value">bharath-prakash-450596263</span>
+                </a>
+                <a href="https://github.com/Bharath2228" target="_blank" rel="noreferrer" className="contact__link">
+                    <span className="contact__label">GitHub</span>
+                    <span className="contact__value">Bharath2228</span>
+                </a>
             </div>
         </section>
     )

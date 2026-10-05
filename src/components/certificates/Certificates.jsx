@@ -62,8 +62,9 @@ export const Certificates = () => {
 
   return (
     <section className="section" id='certificates'>
-      <h2 className="section__title">Certificates & Achievements</h2>
-      <span className="section__subtitle">My Accomplishments</span>
+      <header className="section__head">
+        <h2 className="section__title">Certificates & Achievements</h2>
+      </header>
       <div className="certificates__container container grid">
         {visibleCertificates.map((cert, index) => (
           <CertificatePannel
