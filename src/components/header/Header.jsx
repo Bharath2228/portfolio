@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import "./header.css";
 
 const links = [
-  { href: "#projects", label: "Projects" },
   { href: "#about", label: "About" },
   { href: "#experience", label: "Experience" },
+  { href: "#projects", label: "Projects" },
   { href: "#skills", label: "Skills" },
   { href: "#certificates", label: "Certificates" },
   { href: "#contact", label: "Contact" },

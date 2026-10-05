@@ -21,9 +21,9 @@ function App() {
 
       <main className="main" id="main">
         <Home />
-        <Work />
         <About />
         <Qualification />
+        <Work />
         <Skills />
         <Certificates />
         <Contact />
