@@ -1,0 +1,60 @@
+.qual {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.timeline {
+    display: grid;
+    gap: 0;
+}
+
+.timeline__item {
+    display: grid;
+    grid-template-columns: 9rem 1fr;
+    gap: 1.5rem;
+    padding: 1.75rem 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.timeline__period {
+    font-size: var(--small-font-size);
+    color: var(--text-color);
+    font-variant-numeric: tabular-nums;
+}
+
+.timeline__role {
+    font-size: var(--normal-font-size);
+    font-weight: var(--font-semi-bold);
+    color: var(--title-color);
+    margin-bottom: 0.25rem;
+}
+
+.timeline__org {
+    font-size: var(--small-font-size);
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+}
+
+.timeline__points {
+    display: grid;
+    gap: 0.45rem;
+    padding-left: 1.1rem;
+    list-style: disc;
+    font-size: var(--small-font-size);
+    color: var(--text-color);
+    max-width: 66ch;
+}
+
+.subhead {
+    font-size: var(--normal-font-size);
+    font-weight: var(--font-semi-bold);
+    color: var(--title-color);
+}
+
+@media screen and (max-width: 640px) {
+    .timeline__item {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+}

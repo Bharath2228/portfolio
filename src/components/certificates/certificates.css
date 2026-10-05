@@ -1,119 +1,84 @@
 .certificates__container {
-    grid-template-columns: repeat(3, 270px);
-    justify-content: center;
-    column-gap: 1.8rem;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1.25rem;
 }
 
 .certificate__panel {
-    max-width: 24rem; /* 384px */
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: var(--container-color); /* Corrected "val" to "var" */
-    border-radius: 1.25rem;
+    background-color: var(--container-color);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Ensures the button is at the bottom */
-    padding-bottom: 1rem; /* Optional: Adds padding around content */
-}
-
-.certificate__img {
-    border-radius: 1.25rem 1.25rem 0 0;
-    max-width: 100%;
-    height: auto; /* Ensures image is responsive */
+    justify-content: space-between;
+    padding: 1.5rem;
+    row-gap: 1rem;
 }
 
 .certificate__title {
-    margin-bottom: 0.5rem;
-    font-weight: bold;
+    font-size: var(--normal-font-size);
+    font-weight: var(--font-semi-bold);
     color: var(--title-color);
+    margin-bottom: 0.25rem;
 }
 
 .certificate__description {
-    font-size: 0.75rem;
+    font-size: var(--small-font-size);
 }
 
-.certificate_title_btn{
-    position: relative;
-    padding-left: 16px;
+.certificate__link {
+    display: inline-flex;
+    align-items: center;
+    justify-self: start;
+    column-gap: 0.35rem;
+    color: var(--accent);
+    font-size: var(--small-font-size);
+    font-weight: var(--font-medium);
+}
+
+.certificate__link:hover {
+    color: var(--accent-hover);
+}
+
+.certificate__link-icon {
+    transition: transform 0.3s;
+}
+
+.certificate__link:hover .certificate__link-icon {
+    transform: translateX(0.2rem);
 }
 
 .view-more-container {
-    max-width: 24rem; /* 384px */
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: val(--container-color);
-    border-radius: 1.25rem;
+    grid-column: 1 / -1;
     display: flex;
-    flex-direction: column;
-    justify-content: end;
+    justify-content: center;
+}
+
+.view-more-btn {
+    display: inline-flex;
     align-items: center;
-    background-image: url("https://theproductmanager.com/wp-content/uploads/sites/4/2022/05/PRD-Product-Analytics-Certification-featured-image-1200x630.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-  
-button {
-  border-radius: 4px;
-  background-color: #5ca1e1;
-  border: none;
-  color: #fff;
-  text-align: center;
-  font-size: 12px;
-  padding: 5px;
-  width: auto;
-  transition: all 0.5s;
-  cursor: pointer;
-  box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
-}
-
-button{
-  cursor: pointer;
-  display: inline-block;
-  position: relative;
-  transition: 0.5s;
-}
-
-button:after {
-  content: '»';
-  font-size: 18px;
-  position: absolute;
-  opacity: 0;  
-  top: -0.6px;
-  right: -20px;
-  transition: 0.5s;
-}
-
-button:hover{
-  padding-right: 24px;
-  padding-left: 8px;
-}
-
-button:hover:after {
-  opacity: 1;
-  right: 10px;
-}
-  
-
-.view-more-btn{
-    border-radius: 4px;
-    background-color: #2f3e4b;
+    column-gap: 0.4rem;
+    background-color: var(--title-color);
+    color: var(--container-color);
     border: none;
-    color: #fff;
-    text-align: center;
-    font-size: 18px;
-    padding: 8px;
-    transition: all 0.5s;
+    border-radius: 999px;
+    font-size: var(--small-font-size);
+    font-weight: var(--font-medium);
+    padding: 0.7rem 1.4rem;
     cursor: pointer;
-    margin-bottom: 60px;
-    box-shadow: 0 10px 20px -8px rgba(0, 0, 0,.7);
-    cursor: pointer;
-    display: inline-block;
-    position: relative;
-    transition: 0.5s;
+    transition: background-color 0.3s, transform 0.2s;
 }
 
-.view-more-btn:hover{
-    transition: 0.5s;
-    padding-right: 24px;
-    padding-left: 24px;  
-    opacity: 1;
-    right: 10px;
+.view-more-btn:hover {
+    background-color: var(--title-color-dark);
+}
+
+.view-more-btn:active {
+    transform: scale(0.98);
+}
+
+/*=============== BREAKPOINTS ===============*/
+@media screen and (max-width: 576px) {
+    .certificates__container {
+        grid-template-columns: 1fr;
+    }
 }

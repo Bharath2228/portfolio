@@ -1,21 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './scrollup.css'
 
 const ScrollUp = () => {
-    window.addEventListener("scroll", function () {
-        const scrollUp = document.querySelector(".scrollup");
+    const [show, setShow] = useState(false)
 
-        // when the scroll is higher than 560 viewport height, add the show-scroll class to a tag with the scroll-top class
-        if (this.scrollY >= 560) {
-            scrollUp.classList.add("show-scroll")
-        } else {
-            scrollUp.classList.remove("show-scroll")
-        }
-    });
+    // Show the button once the hero has scrolled out of view.
+    // IntersectionObserver instead of a window scroll listener: no per-frame work.
+    useEffect(() => {
+        const hero = document.getElementById('home')
+        if (!hero) return
+
+        const observer = new IntersectionObserver(([entry]) => {
+            setShow(!entry.isIntersecting)
+        })
+        observer.observe(hero)
+        return () => observer.disconnect()
+    }, [])
 
     return (
-        <a href="#home" className="scrollup">
-            <i className="uil uil-arrow-up scrollup__icon"></i>
+        <a href="#home" aria-label="Back to top" className={`scrollup ${show ? 'show-scroll' : ''}`}>
+            <i className="uil uil-arrow-up scrollup__icon" aria-hidden="true"></i>
         </a>
     )
 }

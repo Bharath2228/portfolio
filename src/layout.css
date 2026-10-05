@@ -1,0 +1,68 @@
+/* Shared layout for the editorial redesign */
+
+.main {
+    padding-bottom: 1rem;
+}
+
+.section {
+    padding: 5.5rem 0 1rem;
+    scroll-margin-top: 4rem;
+}
+
+/* One centred column for every section, so headings line up with content */
+.container,
+.section__head {
+    width: min(968px, calc(100% - 3rem));
+    max-width: 968px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section__head {
+    margin-bottom: 3rem;
+    display: grid;
+    gap: 0.75rem;
+}
+
+.section__title {
+    text-align: left;
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: var(--font-semi-bold);
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--title-color);
+}
+
+.section__lead {
+    color: var(--text-color);
+    max-width: 60ch;
+}
+
+.skip-link {
+    position: absolute;
+    left: 1rem;
+    top: -4rem;
+    z-index: var(--z-modal);
+    background: var(--accent);
+    color: var(--on-accent);
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+}
+
+.skip-link:focus {
+    top: 1rem;
+}
+
+.header {
+    position: sticky;
+}
+
+.nav {
+    position: relative;
+}
+
+@media screen and (max-width: 860px) {
+    .section {
+        padding: 4rem 0 1rem;
+    }
+}

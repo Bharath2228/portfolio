@@ -1,35 +1,19 @@
 import React from 'react'
-import './footer.css'
+import './footer-bar.css'
 
 const Footer = () => {
     return (
         <footer className="footer">
-            <div className="footer__container container">
-                <h1 className="footer__title">Bharath</h1>
+            <div className="container footer__inner">
+                <p className="footer__name">Bharath Prakash</p>
 
-                <ul className="footer__list">
-                    <li>
-                        <a href="#about" className="footer__link">About</a>
-                    </li>
+                <nav className="footer__nav" aria-label="Footer">
+                    <a href="#projects">Projects</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#contact">Contact</a>
+                </nav>
 
-                    <li>
-                        <a href="#projects" className="footer__link">Projects</a>
-                    </li>
-                </ul>
-
-                <div className="footer__social">
-                    <a href="https://www.linkedin.com/in/bharath-prakash-450596263/" className="footer__social-link" target="_blank" rel="noreferrer">
-                        <i className="bx bxl-linkedin"></i>
-                    </a>
-
-                    <a href="https://github.com/Bharath2228" className="footer__social-link" target="_blank" rel="noreferrer">
-                        <i className="bx bxl-github"></i>
-                    </a>
-                </div>
-
-                <span className='footer__copy'>
-                    &#169; Bharath. All rigths reserved
-                </span>
+                <p className="footer__copy">&copy; {new Date().getFullYear()} Bharath Prakash. All rights reserved.</p>
             </div>
         </footer>
     )

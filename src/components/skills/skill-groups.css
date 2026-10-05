@@ -1,0 +1,18 @@
+.skill-groups {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem 3rem;
+}
+
+.skill-group__title {
+    font-size: var(--normal-font-size);
+    font-weight: var(--font-semi-bold);
+    color: var(--title-color);
+    margin-bottom: 0.9rem;
+}
+
+@media screen and (max-width: 860px) {
+    .skill-groups {
+        grid-template-columns: 1fr;
+    }
+}
