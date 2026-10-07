@@ -1,6 +1,5 @@
 import React from 'react'
 import "./home.css"
-import CV from "../../assets/Bharath_Prakash_CV.pdf"
 import HeroImg from "../../assets/Profile-Pic-Cropped.webp"
 
 export const Home = () => {
@@ -10,18 +9,7 @@ export const Home = () => {
         <div className="hero__text">
           <p className="hero__role">Robotics Software Engineer</p>
           <h1 className="hero__title">Bharath Prakash</h1>
-          <p className="hero__statement">
-            I build real-time control stacks and motion planning for industrial cobots,
-            from ROS 2 hardware interfaces to trajectory smoothing in MoveIt 2.
-          </p>
-          <p className="hero__meta">M.Sc. Communication and Media Engineering, Hochschule Offenburg</p>
-
-          <div className="hero__actions">
-            <a href="#projects" className="button">View projects</a>
-            <a href={CV} target="_blank" rel="noopener noreferrer" className="button button--outline">
-              Download CV
-            </a>
-          </div>
+          <p className="hero__meta">M.Sc. Communication and Media Engineering,<br />Hochschule Offenburg</p>
 
           <ul className="hero__links" aria-label="Profiles">
             <li>
