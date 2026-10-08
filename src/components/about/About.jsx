@@ -1,6 +1,5 @@
 import React from 'react';
 import "./about.css";
-import CV from "../../assets/Bharath_Prakash_CV.pdf";
 
 const facts = [
   { value: "3+ years", label: "Software engineering, including industrial robotics" },
@@ -36,10 +35,6 @@ export const About = () => {
               </div>
             ))}
           </dl>
-
-          <a href={CV} target="_blank" rel="noopener noreferrer" className="text-link">
-            Download full CV
-          </a>
         </div>
       </div>
     </section>

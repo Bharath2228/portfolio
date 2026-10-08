@@ -1,6 +1,34 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import './work.css'
 import { featuredProjects, otherProjects } from './Data'
+
+const ProjectCard = ({ project }) => {
+    const image = project.media?.image || project.image
+    const meta = project.organisation || project.category
+
+    return (
+        <Link className="project-card" to={`/projects/${project.id}`}>
+            <div className="project-card__media">
+                {image ? (
+                    <img src={image} alt={`${project.title} preview`} className="project-card__img" />
+                ) : (
+                    <div className="project-card__placeholder" aria-hidden="true">
+                        <i className="bx bx-folder"></i>
+                    </div>
+                )}
+            </div>
+
+            <div className="project-card__head">
+                <div className="project-card__head-text">
+                    <p className="project-card__meta">{meta}</p>
+                    <h3 className="project-card__title">{project.title}</h3>
+                </div>
+                <i className="bx bx-chevron-right project-card__chevron" aria-hidden="true"></i>
+            </div>
+        </Link>
+    )
+}
 
 const Work = () => {
     return (
@@ -11,52 +39,18 @@ const Work = () => {
             </header>
 
             <div className="container">
-                <div className="records">
+                <div className="project-grid">
                     {featuredProjects.map((project) => (
-                        <article className="record" key={project.id}>
-                            <div className="record__text">
-                                <p className="record__meta">{project.organisation}</p>
-                                <h3 className="record__title">{project.title}</h3>
-                                <p className="record__summary">{project.summary}</p>
-
-                                <dl className="spec">
-                                    {project.specs.map((spec) => (
-                                        <div className="spec__row" key={spec.label}>
-                                            <dt className="spec__label">{spec.label}</dt>
-                                            <dd className="spec__value">{spec.value}</dd>
-                                        </div>
-                                    ))}
-                                </dl>
-                            </div>
-
-                            {project.media && (
-                                <div className="record__media">
-                                    <img src={project.media.image} alt="Arm model and planning view in RViz" className="record__media-img" />
-                                    <img src={project.media.gif} alt="Looping animation of the 3-DoF arm moving in simulation" className="record__media-img" loading="lazy" />
-                                </div>
-                            )}
-                        </article>
+                        <ProjectCard project={project} key={project.id} />
                     ))}
                 </div>
 
                 <h3 className="subhead">More projects</h3>
-                <ul className="index">
+                <div className="project-grid">
                     {otherProjects.map((project) => (
-                        <li className="index__row" key={project.id}>
-                            <img src={project.image} alt={`Screenshot of ${project.title}`} className="index__thumb" />
-                            <div className="index__text">
-                                <p className="index__title">{project.title}</p>
-                                <p className="index__category">{project.category}</p>
-                            </div>
-                            <div className="index__links">
-                                {project.demo && (
-                                    <a href={project.demo} target="_blank" rel="noreferrer">Live demo</a>
-                                )}
-                                <a href={project.github} target="_blank" rel="noreferrer">Source</a>
-                            </div>
-                        </li>
+                        <ProjectCard project={project} key={project.id} />
                     ))}
-                </ul>
+                </div>
             </div>
         </section>
     )

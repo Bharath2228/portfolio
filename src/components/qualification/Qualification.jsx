@@ -68,18 +68,6 @@ const education = [
         place: "Bengaluru, India",
         period: "May 2019 - Jun 2023",
     },
-    {
-        degree: "Pre-University College",
-        org: "Vidhya Mandir Ind. Pre-University College",
-        place: "Bengaluru, India",
-        period: "2017 - 2019",
-    },
-    {
-        degree: "Secondary Education",
-        org: "St Mary's High School",
-        place: "Bengaluru, India",
-        period: "2017",
-    },
 ];
 
 export const Qualification = () => {
