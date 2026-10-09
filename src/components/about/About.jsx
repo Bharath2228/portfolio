@@ -1,10 +1,8 @@
 import React from 'react';
 import "./about.css";
-import CV from "../../assets/Bharath_Prakash_CV.pdf";
 
 const facts = [
   { value: "3+ years", label: "Software engineering, including industrial robotics" },
-  { value: "250 Hz", label: "Real-time control loop on a 7-DoF cobot" },
   { value: "C++ / Python", label: "Hardware interfaces, planning tools and desktop apps" },
   { value: "English C1 · German A2", label: "Working languages" },
 ];
@@ -36,10 +34,6 @@ export const About = () => {
               </div>
             ))}
           </dl>
-
-          <a href={CV} target="_blank" rel="noopener noreferrer" className="text-link">
-            Download full CV
-          </a>
         </div>
       </div>
     </section>

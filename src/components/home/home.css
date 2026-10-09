@@ -1,108 +1,235 @@
+/*================ MINIMALIST EDITORIAL HERO SECTION ================*/
+
 .hero {
-    padding: 5rem 0 4rem;
+    position: relative;
+    padding: clamp(3.5rem, 7vh, 5.5rem) 0;
+    overflow: hidden;
+}
+
+/* Subtle Ambient Lighting */
+.hero__glow {
+    position: absolute;
+    top: -80px;
+    right: 5%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(
+        circle,
+        rgba(6, 182, 212, 0.08) 0%,
+        rgba(59, 130, 246, 0.04) 40%,
+        transparent 70%
+    );
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(60px);
+}
+
+:root[data-theme="dark"] .hero__glow,
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .hero__glow {
+        background: radial-gradient(
+            circle,
+            rgba(6, 182, 212, 0.12) 0%,
+            rgba(59, 130, 246, 0.06) 45%,
+            transparent 70%
+        );
+    }
 }
 
 .hero__container {
+    position: relative;
+    z-index: 1;
     display: grid;
-    grid-template-columns: 1.25fr 1fr;
+    grid-template-columns: 1fr auto;
     align-items: center;
-    gap: 4rem;
+    gap: clamp(2.5rem, 5vw, 4.5rem);
 }
 
+/* Hero Content Column */
+.hero__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-width: 580px;
+}
+
+/* Professional Role Label */
 .hero__role {
     font-size: var(--small-font-size);
     font-weight: var(--font-medium);
     color: var(--accent);
-    margin-bottom: 1rem;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
 }
 
+/* Headline - Balanced Sweet Spot */
 .hero__title {
-    font-size: clamp(2.5rem, 6vw, 4.25rem);
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.03em;
     font-weight: var(--font-semi-bold);
-    margin-bottom: 1.5rem;
+    color: var(--title-color);
+    margin-bottom: 0.85rem;
 }
 
-.hero__statement {
-    font-size: clamp(1.05rem, 2vw, 1.25rem);
-    line-height: 1.6;
-    max-width: 34rem;
+/* Subtitle - Academic Affiliation */
+.hero__subtitle {
+    font-size: clamp(1rem, 1.35vw, 1.15rem);
+    line-height: 1.5;
+    color: var(--title-color);
+    font-weight: var(--font-normal);
+    opacity: 0.9;
+    margin-bottom: 2rem;
+}
+
+.hero__subtitle span {
+    font-size: clamp(0.875rem, 1.2vw, 0.975rem);
     color: var(--text-color);
-    margin-bottom: 1rem;
+    display: inline-block;
+    margin-top: 0.2rem;
 }
 
-.hero__meta {
-    font-size: var(--small-font-size);
-    margin-bottom: 2.25rem;
-}
-
+/* Social Buttons Row */
 .hero__actions {
     display: flex;
     flex-wrap: wrap;
+    align-items: center;
     gap: 0.75rem;
-    margin-bottom: 2.25rem;
 }
 
-.hero__actions .button {
-    padding: 0.9rem 1.5rem;
-    border-radius: 999px;
-}
-
-.button--outline {
-    background: transparent;
-    color: var(--title-color);
-    border: 1px solid var(--border-color);
-}
-
-.button--outline:hover {
-    background: var(--container-color);
-    color: var(--title-color-dark);
-}
-
-.hero__links {
+.hero__socials {
     display: flex;
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: 0.75rem;
+}
+
+.hero__social-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.6rem 1.15rem;
+    border-radius: 9999px;
+    background: var(--container-color);
+    border: 1px solid var(--border-color);
+    color: var(--title-color);
     font-size: var(--small-font-size);
+    font-weight: var(--font-medium);
+    text-decoration: none;
+    box-shadow: 0 1px 4px var(--shadow-color);
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.hero__links a {
-    color: var(--text-color);
-    text-decoration: underline;
-    text-underline-offset: 4px;
-}
-
-.hero__links a:hover {
+.hero__social-btn i {
+    font-size: 1.05rem;
     color: var(--accent);
+    transition: transform 0.2s ease;
 }
 
-.hero__figure {
+.hero__social-btn:hover {
+    color: var(--title-color);
+    border-color: rgba(148, 163, 184, 0.45);
+    background: rgba(148, 163, 184, 0.08);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px var(--shadow-color);
+}
+
+.hero__social-btn:hover i {
+    transform: scale(1.15);
+}
+
+.hero__social-btn:active {
+    transform: scale(0.98);
+}
+
+/*================ PORTRAIT: DOUBLE-BEZEL FRAME ================*/
+
+.hero__portrait-wrapper {
+    position: relative;
     justify-self: end;
     width: 100%;
-    max-width: 380px;
+    max-width: clamp(260px, 26vw, 300px);
 }
 
-.hero__img {
-    width: 100%;
+/* Ambient backlight behind the portrait */
+.hero__portrait-ambient {
+    position: absolute;
+    inset: -14px;
+    border-radius: 2rem;
+    background: radial-gradient(
+        circle,
+        rgba(6, 182, 212, 0.18) 0%,
+        rgba(59, 130, 246, 0.1) 45%,
+        transparent 75%
+    );
+    filter: blur(24px);
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}
+
+.hero__portrait-wrapper:hover .hero__portrait-ambient {
+    opacity: 0.95;
+}
+
+/* Outer Machined Shell */
+.hero__portrait-shell {
+    position: relative;
+    z-index: 1;
+    background: var(--container-color);
+    border: 1px solid var(--border-color);
+    border-radius: 1.75rem;
+    padding: 0.65rem;
+    box-shadow: 0 16px 36px var(--shadow-color);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero__portrait-wrapper:hover .hero__portrait-shell {
+    border-color: rgba(148, 163, 184, 0.35);
+    transform: translateY(-3px);
+    box-shadow: 0 22px 48px var(--shadow-color);
+}
+
+/* Inner Photo Figure */
+.hero__portrait-figure {
+    margin: 0;
+    overflow: hidden;
+    border-radius: calc(1.75rem - 0.65rem);
+    background: #141a24;
     aspect-ratio: 4 / 5;
-    object-fit: cover;
-    border-radius: 1.25rem;
+    position: relative;
 }
 
+.hero__portrait-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero__portrait-wrapper:hover .hero__portrait-img {
+    transform: scale(1.03);
+}
+
+/* Responsive adjustments */
 @media screen and (max-width: 860px) {
     .hero {
-        padding: 3rem 0 3rem;
+        padding: 2.75rem 0 2.5rem;
     }
 
     .hero__container {
         grid-template-columns: 1fr;
-        gap: 2.5rem;
+        gap: 2.25rem;
     }
 
-    .hero__figure {
+    .hero__portrait-wrapper {
         justify-self: start;
-        max-width: 260px;
+        max-width: 250px;
         order: -1;
+    }
+
+    .hero__text {
+        max-width: 100%;
     }
 }

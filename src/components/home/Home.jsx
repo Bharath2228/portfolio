@@ -1,47 +1,80 @@
-import React from 'react'
-import "./home.css"
-import CV from "../../assets/Bharath_Prakash_CV.pdf"
-import HeroImg from "../../assets/Profile-Pic-Cropped.webp"
+import React from 'react';
+import "./home.css";
+import HeroImg from "../../assets/Profile-Pic-Cropped.webp";
 
 export const Home = () => {
   return (
     <section className="hero" id="top">
+      <div className="hero__glow" aria-hidden="true"></div>
+
       <div className="hero__container container">
         <div className="hero__text">
+          {/* Professional Role */}
           <p className="hero__role">Robotics Software Engineer</p>
+
+          {/* Main Name & Title */}
           <h1 className="hero__title">Bharath Prakash</h1>
-          <p className="hero__statement">
-            I build real-time control stacks and motion planning for industrial cobots,
-            from ROS 2 hardware interfaces to trajectory smoothing in MoveIt 2.
+
+          {/* Academic Subtitle */}
+          <p className="hero__subtitle">
+            M.Sc. Communication and Media Engineering<br />
+            <span>Hochschule Offenburg, Germany</span>
           </p>
-          <p className="hero__meta">M.Sc. Communication and Media Engineering, Hochschule Offenburg</p>
 
+          {/* Social Links */}
           <div className="hero__actions">
-            <a href="#projects" className="button">View projects</a>
-            <a href={CV} target="_blank" rel="noopener noreferrer" className="button button--outline">
-              Download CV
-            </a>
-          </div>
+            <div className="hero__socials" aria-label="Social and contact profiles">
+              <a
+                href="https://github.com/Bharath2228"
+                target="_blank"
+                rel="noreferrer"
+                className="hero__social-btn"
+                title="GitHub Profile"
+              >
+                <i className="uil uil-github-alt" aria-hidden="true"></i>
+                <span>GitHub</span>
+              </a>
 
-          <ul className="hero__links" aria-label="Profiles">
-            <li>
-              <a href="https://www.linkedin.com/in/bharath-prakash-450596263/" target="_blank" rel="noreferrer">LinkedIn</a>
-            </li>
-            <li>
-              <a href="https://github.com/Bharath2228" target="_blank" rel="noreferrer">GitHub</a>
-            </li>
-            <li>
-              <a href="mailto:prakashbharath28@gmail.com">Email</a>
-            </li>
-          </ul>
+              <a
+                href="https://www.linkedin.com/in/bharath-prakash-450596263/"
+                target="_blank"
+                rel="noreferrer"
+                className="hero__social-btn"
+                title="LinkedIn Profile"
+              >
+                <i className="uil uil-linkedin" aria-hidden="true"></i>
+                <span>LinkedIn</span>
+              </a>
+
+              <a
+                href="mailto:prakashbharath28@gmail.com"
+                className="hero__social-btn"
+                title="Send an Email"
+              >
+                <i className="uil uil-envelope" aria-hidden="true"></i>
+                <span>Email</span>
+              </a>
+            </div>
+          </div>
         </div>
 
-        <figure className="hero__figure">
-          <img src={HeroImg} alt="Portrait of Bharath Prakash" className="hero__img" />
-        </figure>
+        {/* Machined Double-Bezel Portrait Frame */}
+        <div className="hero__portrait-wrapper">
+          <div className="hero__portrait-ambient" aria-hidden="true"></div>
+
+          <div className="hero__portrait-shell">
+            <figure className="hero__portrait-figure">
+              <img
+                src={HeroImg}
+                alt="Bharath Prakash - Robotics Software Engineer"
+                className="hero__portrait-img"
+              />
+            </figure>
+          </div>
+        </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

@@ -2,12 +2,10 @@ import React, { useEffect, useState } from 'react';
 import "./header.css";
 
 const links = [
-  { href: "#projects", label: "Projects" },
-  { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
-  { href: "#skills", label: "Skills" },
-  { href: "#certificates", label: "Certificates" },
-  { href: "#contact", label: "Contact" },
+  { href: "/#experience", label: "Experience" },
+  { href: "/#projects", label: "Projects" },
+  { href: "/#skills", label: "Skills" },
+  { href: "/#contact", label: "Contact" },
 ];
 
 const readStoredTheme = () => {
@@ -45,7 +43,7 @@ const Header = () => {
   return (
     <header className="header">
       <nav className="nav container" aria-label="Main">
-        <a href="#top" className="nav__logo">Bharath Prakash</a>
+        <a href="/#top" className="nav__logo">Bharath Prakash</a>
 
         <ul className={`nav__list ${menuOpen ? "nav__list--open" : ""}`}>
           {links.map((link) => (

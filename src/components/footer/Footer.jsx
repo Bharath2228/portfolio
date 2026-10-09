@@ -8,9 +8,9 @@ const Footer = () => {
                 <p className="footer__name">Bharath Prakash</p>
 
                 <nav className="footer__nav" aria-label="Footer">
-                    <a href="#projects">Projects</a>
-                    <a href="#experience">Experience</a>
-                    <a href="#contact">Contact</a>
+                    <a href="/#projects">Projects</a>
+                    <a href="/#experience">Experience</a>
+                    <a href="/#contact">Contact</a>
                 </nav>
 
                 <p className="footer__copy">&copy; {new Date().getFullYear()} Bharath Prakash. All rights reserved.</p>

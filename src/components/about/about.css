@@ -38,15 +38,6 @@
     color: var(--text-color);
 }
 
-.text-link {
-    color: var(--accent);
-    font-weight: var(--font-medium);
-}
-
-.text-link:hover {
-    color: var(--accent-hover);
-}
-
 @media screen and (max-width: 860px) {
     .about__grid {
         grid-template-columns: 1fr;
