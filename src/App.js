@@ -7,7 +7,6 @@ import Header from './components/header/Header';
 import Home from './components/home/Home';
 import Work from './components/work/Work';
 import ProjectDetail from './components/work/ProjectDetail';
-import About from './components/about/About';
 import Qualification from './components/qualification/Qualification';
 import Skills from './components/skills/Skills';
 import Contact from './components/contact/Contact';
@@ -36,7 +35,6 @@ const ScrollManager = () => {
 const HomePage = () => (
   <>
     <Home />
-    <About />
     <Qualification />
     <Work />
     <Skills />

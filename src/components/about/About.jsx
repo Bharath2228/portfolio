@@ -3,7 +3,6 @@ import "./about.css";
 
 const facts = [
   { value: "3+ years", label: "Software engineering, including industrial robotics" },
-  { value: "250 Hz", label: "Real-time control loop on a 7-DoF cobot" },
   { value: "C++ / Python", label: "Hardware interfaces, planning tools and desktop apps" },
   { value: "English C1 · German A2", label: "Working languages" },
 ];
