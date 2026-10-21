@@ -19,14 +19,23 @@ const ScrollManager = () => {
   const location = useLocation();
 
   useEffect(() => {
+    if ('scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+  }, []);
+
+  useEffect(() => {
+    // Explicit "instant" overrides the global smooth-scroll CSS: a navigation
+    // reset must jump immediately, not animate (an animated scroll racing a
+    // still-loading page's layout shifts is what caused the up/down bounce).
     if (location.hash) {
       const el = document.querySelector(location.hash);
       if (el) {
-        el.scrollIntoView();
+        el.scrollIntoView({ behavior: 'instant', block: 'start' });
         return;
       }
     }
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, [location]);
 
   return null;

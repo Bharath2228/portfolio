@@ -4,8 +4,7 @@ import './work.css'
 import { featuredProjects, otherProjects } from './Data'
 
 const ProjectCard = ({ project }) => {
-    const image = project.media?.image || project.image
-    const meta = project.organisation || project.category
+    const image = project.thumbnail || project.media?.image || project.image
 
     return (
         <Link className="project-card" to={`/projects/${project.id}`}>
@@ -21,7 +20,6 @@ const ProjectCard = ({ project }) => {
 
             <div className="project-card__head">
                 <div className="project-card__head-text">
-                    <p className="project-card__meta">{meta}</p>
                     <h3 className="project-card__title">{project.title}</h3>
                 </div>
                 <i className="bx bx-chevron-right project-card__chevron" aria-hidden="true"></i>
@@ -34,8 +32,7 @@ const Work = () => {
     return (
         <section className="section projects" id="projects">
             <header className="section__head">
-                <h2 className="section__title">Projects</h2>
-                <p className="section__lead">Robotics work first, then software and web projects.</p>
+                <h2 className="section__title">Featured Projects</h2>
             </header>
 
             <div className="container">
