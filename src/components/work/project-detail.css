@@ -137,6 +137,125 @@
     list-style: disc;
 }
 
+.screens {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    margin-bottom: 1.5rem;
+    padding-left: 2.75rem;
+}
+
+.screens::before {
+    content: "";
+    position: absolute;
+    left: 0.95rem;
+    top: 0.3rem;
+    bottom: 0.3rem;
+    width: 1px;
+    background: var(--border-color);
+}
+
+.screens__row {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+    gap: 1.75rem;
+    align-items: center;
+}
+
+.screens__row:nth-child(even) {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+}
+
+.screens__row:nth-child(even) .screens__media {
+    order: 2;
+}
+
+.screens__row:nth-child(even) .screens__copy {
+    order: 1;
+}
+
+.screens__index {
+    position: absolute;
+    left: -2.75rem;
+    top: -0.1rem;
+    width: 1.9rem;
+    height: 1.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: var(--font-semi-bold);
+    font-variant-numeric: tabular-nums;
+    color: var(--accent);
+    background: var(--container-color);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+}
+
+.screens__media {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--container-color);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1rem;
+    min-height: 220px;
+}
+
+.screens__img {
+    width: 100%;
+    max-height: 360px;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    border-radius: 0.4rem;
+}
+
+.screens__copy {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.screens__label {
+    font-size: 1.05rem;
+    font-weight: var(--font-semi-bold);
+    color: var(--title-color);
+    line-height: 1.3;
+}
+
+.screens__text {
+    font-size: var(--small-font-size);
+    line-height: 1.6;
+    color: var(--text-color);
+    margin: 0;
+    max-width: 42ch;
+}
+
+@media screen and (max-width: 720px) {
+    .screens {
+        padding-left: 2.25rem;
+        gap: 2rem;
+    }
+
+    .screens__row,
+    .screens__row:nth-child(even) {
+        grid-template-columns: 1fr;
+    }
+
+    .screens__row:nth-child(even) .screens__media,
+    .screens__row:nth-child(even) .screens__copy {
+        order: initial;
+    }
+
+    .screens__text {
+        max-width: none;
+    }
+}
+
 .project-detail__tags {
     display: flex;
     flex-wrap: wrap;

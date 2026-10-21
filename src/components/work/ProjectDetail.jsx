@@ -91,6 +91,28 @@ const ProjectDetail = () => {
                     </>
                 )}
 
+                {project.gallery && (
+                    <>
+                        <h2 className="project-detail__subhead">Inside the app</h2>
+                        <div className="screens">
+                            {project.gallery.map((item, index) => (
+                                <div className="screens__row" key={item.image}>
+                                    <div className="screens__index" aria-hidden="true">
+                                        {String(index + 1).padStart(2, '0')}
+                                    </div>
+                                    <div className="screens__media">
+                                        <img src={item.image} alt={item.label || project.title} className="screens__img" />
+                                    </div>
+                                    <div className="screens__copy">
+                                        {item.label && <h3 className="screens__label">{item.label}</h3>}
+                                        {item.caption && <p className="screens__text">{item.caption}</p>}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </>
+                )}
+
                 {project.techStack && (
                     <>
                         <h2 className="project-detail__subhead">Tech stack</h2>
