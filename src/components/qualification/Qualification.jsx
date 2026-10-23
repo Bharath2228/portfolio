@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import "./timeline.css";
 
 const treeNodes = [
@@ -15,8 +15,9 @@ const treeNodes = [
       "Real-time ROS 2 stack for a 7-DoF cobot (Kassow KR1410) at 250 Hz, using the robot's native API",
       "ros2_control hardware interface in C++ with position, velocity and acceleration commands, and digital I/O",
       "MoveIt 2 planning with OMPL and Pilz, tuned TOTG and Ruckig trajectory smoothing",
+      "Deployed a pick-and-place application with 80+ taught waypoints, syncing gripper I/O with an analog distance sensor for object detection",
     ],
-    tags: ["ROS 2", "ros2_control", "MoveIt 2", "C++", "Kinematics", "7-DoF Cobot"],
+    tags: ["ROS 2", "ros2_control", "MoveIt 2", "C++", "Kinematics", "7-DoF Cobot", "Pick & Place"],
   },
   {
     id: "biomechanics-inst",
@@ -30,22 +31,9 @@ const treeNodes = [
     points: [
       "Contributed to a unified HDF5 schema for force plate, motion capture, IMU and EMG data",
       "Built Storage Scout, a PyQt6 and SQLite tool to audit research data across local, NAS and network drives",
+      "Designed its concurrent scanning engine with producer-consumer thread queues, batched SQLite transactions and WAL journaling to keep the UI responsive on large datasets",
     ],
-    tags: ["Python", "PyQt6", "SQLite", "HDF5", "Sensor Pipelines"],
-  },
-  {
-    id: "msc-offenburg",
-    role: "M.Sc. Communication and Media Engineering",
-    org: "Hochschule Offenburg",
-    place: "Offenburg, Germany",
-    period: "Oct 2025 - Present",
-    isCurrent: true,
-    branch: "academic",
-    branchLabel: "academic/msc-robotics",
-    points: [
-      "Graduate studies focusing on Robotics, Real-time Systems, Sensor Fusion, and Embedded Controls",
-    ],
-    tags: ["Robotics", "Real-Time Systems", "Embedded Systems"],
+    tags: ["Python", "PyQt6", "SQLite", "HDF5", "Sensor Pipelines", "Concurrency"],
   },
   {
     id: "boeing-swe-2",
@@ -58,7 +46,8 @@ const treeNodes = [
     branchLabel: "flight/iss-migration-v2",
     points: [
       "Cross-platform desktop tool that packaged and extended migration scripts, cutting manual work by 99%",
-      "Parallelised migration on HPC infrastructure and built validation tools that ensured 100% data integrity",
+      "Parallelised migration processes on HPC infrastructure to accelerate large-scale data transfers",
+      "Developed Python-based validation and monitoring tools that ensured 100% data integrity during migration",
     ],
     tags: ["Python", "HPC", "Desktop Architecture", "Data Integrity"],
   },
@@ -74,8 +63,9 @@ const treeNodes = [
     points: [
       "Automated MSSQL-to-MySQL migration with Python, cutting manual effort by 90%",
       "Modernised a legacy VB6 application into a Python desktop application",
+      "Converted roughly 10,000 lines of T-SQL across 15 scripts into MySQL stored procedures",
     ],
-    tags: ["Python", "MySQL", "T-SQL", "MSSQL", "VB6 Modernization"],
+    tags: ["Python", "MySQL", "T-SQL", "MSSQL", "VB6 Modernization", "Stored Procedures"],
   },
   {
     id: "bosch-intern",
@@ -91,64 +81,20 @@ const treeNodes = [
     ],
     tags: ["Industrial Automation", "Manufacturing Systems"],
   },
-  {
-    id: "be-ramaiah",
-    role: "B.E. Electronics and Instrumentation Engineering",
-    org: "M S Ramaiah Institute of Technology",
-    place: "Bengaluru, India",
-    period: "May 2019 - Jun 2023",
-    isCurrent: false,
-    branch: "academic",
-    branchLabel: "origin/b-eng-instrumentation",
-    points: [
-      "Foundational degree covering Control Systems, Microcontrollers, Signal Processing, and Transducers",
-    ],
-    tags: ["Control Theory", "Instrumentation", "Microcontrollers", "Signals"],
-  },
-];
-
-const filterOptions = [
-  { key: "all", label: "All Tracks", dotClass: null },
-  { key: "robotics", label: "Robotics & Controls", dotClass: "tree-filter-dot--robotics" },
-  { key: "aerospace", label: "Aerospace & Systems", dotClass: "tree-filter-dot--aerospace" },
-  { key: "research", label: "Biomechanics & Data", dotClass: "tree-filter-dot--research" },
-  { key: "academic", label: "Education & Foundations", dotClass: "tree-filter-dot--academic" },
 ];
 
 export const Qualification = () => {
-  const [activeFilter, setActiveFilter] = useState("all");
-
   return (
     <section className="section" id="experience">
       <header className="section__head">
-        <h2 className="section__title">Experience and Education</h2>
+        <h2 className="section__title">Experience</h2>
       </header>
 
       <div className="container qual-tree">
-        {/* Interactive Branch Filters */}
-        <div className="tree-controls">
-          <div className="tree-filters" role="group" aria-label="Filter career tracks">
-            {filterOptions.map((filter) => (
-              <button
-                key={filter.key}
-                type="button"
-                className={`tree-filter-btn ${activeFilter === filter.key ? "tree-filter-btn--active" : ""}`}
-                onClick={() => setActiveFilter(filter.key)}
-              >
-                {filter.dotClass && <span className={`tree-filter-dot ${filter.dotClass}`} aria-hidden="true"></span>}
-                {filter.label}
-              </button>
-            ))}
-          </div>
-        </div>
-
         {/* The Tree Graph Timeline */}
         <ol className="tree-timeline">
           {treeNodes.map((node) => {
-            const isMatch = activeFilter === "all" || node.branch === activeFilter;
-            const nodeClass = `tree-node tree-node--${node.branch} ${
-              isMatch ? "tree-node--highlighted" : "tree-node--dimmed"
-            }`;
+            const nodeClass = `tree-node tree-node--${node.branch}`;
 
             return (
               <li className={nodeClass} key={node.id}>
