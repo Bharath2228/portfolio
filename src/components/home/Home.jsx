@@ -2,6 +2,58 @@ import React from 'react';
 import "./home.css";
 import HeroImg from "../../assets/Profile-Pic-Cropped.webp";
 
+// Pick-and-place cycle: shoulder/elbow/wrist reach down to the left marker,
+// close the gripper, lift, carry the block across, set it down on the right
+// marker, release, and return empty-handed. One continuous synchronised
+// timeline drives every joint, the gripper fingers and the block together.
+const HeroPickPlaceArm = () => (
+  <svg
+    className="hero__arm"
+    viewBox="0 45 480 275"
+    aria-hidden="true"
+    focusable="false"
+  >
+    {/* Resting on the pick surface until the gripper closes on it */}
+    <rect className="pp-box pp-box--pick" x="126" y="143" width="18" height="18" rx="3" />
+    {/* Resting on the place surface once the gripper has released it */}
+    <rect className="pp-box pp-box--place" x="345" y="139" width="18" height="18" rx="3" />
+
+    <rect className="pp-base-lower" x="200" y="300" width="90" height="12" rx="3" />
+    <rect className="pp-base" x="219" y="282" width="52" height="22" rx="5" />
+
+    <g transform="translate(245,300)">
+      <g className="pp-j1">
+        <rect className="pp-link" x="-8" y="-100" width="16" height="100" rx="8" />
+        <circle className="pp-joint pp-joint--shoulder" cx="0" cy="0" r="12" />
+        <g transform="translate(0,-100)">
+          <g className="pp-j2">
+            <rect className="pp-link" x="-7" y="-85" width="14" height="85" rx="7" />
+            <circle className="pp-joint" cx="0" cy="0" r="10" />
+            <g transform="translate(0,-85)">
+              <g className="pp-j3">
+                <rect className="pp-link pp-link--wrist" x="-5" y="-30" width="10" height="30" rx="5" />
+                <circle className="pp-joint pp-joint--wrist" cx="0" cy="0" r="8" />
+                <g transform="translate(0,-30)">
+                  {/* Nested in the wrist's own transform chain, so it tracks the
+                      gripper exactly through the swing instead of approximating
+                      the path with its own keyframes. */}
+                  <rect className="pp-box pp-box--held" x="-9" y="-21" width="18" height="18" rx="3" />
+                  <g className="pp-finger-l">
+                    <rect x="-7" y="-24" width="8" height="24" rx="3" />
+                  </g>
+                  <g className="pp-finger-r">
+                    <rect x="-1" y="-24" width="8" height="24" rx="3" />
+                  </g>
+                </g>
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </svg>
+);
+
 export const Home = () => {
   return (
     <section className="hero" id="top">
@@ -71,6 +123,11 @@ export const Home = () => {
               />
             </figure>
           </div>
+        </div>
+
+        {/* Ambient pick-and-place animation, grounded with the rest of the hero */}
+        <div className="hero__arm-row">
+          <HeroPickPlaceArm />
         </div>
       </div>
     </section>

@@ -5,7 +5,7 @@ import "./skill-groups.css";
 const groups = [
     {
         title: "Robotics and motion planning",
-        items: ["ROS 2 (Jazzy)", "ros2_control", "MoveIt 2", "OMPL", "Pilz Industrial Motion Planner", "URDF/Xacro", "RViz2", "Gazebo / Ignition", "Linux real-time kernel"],
+        items: ["ROS 2", "ros2_control", "MoveIt 2", "OMPL", "Pilz Industrial Motion Planner", "URDF/Xacro", "RViz2", "Gazebo / Ignition", "Linux real-time kernel"],
     },
     {
         title: "Perception and computer vision",
@@ -13,7 +13,7 @@ const groups = [
     },
     {
         title: "Embedded systems and hardware",
-        items: ["Arduino", "UART / serial", "Digital I/O", "Relay control", "IMU, temperature and distance sensors"],
+        items: ["Arduino", "UART / serial", "Digital I/O", "Relay control", "IMU sensors", "Temperature sensors", "Distance sensors"],
     },
     {
         title: "Programming languages",

@@ -2,7 +2,10 @@
 
 .hero {
     position: relative;
-    padding: clamp(3.5rem, 7vh, 5.5rem) 0;
+    min-height: calc(100svh - 4rem);
+    display: flex;
+    align-items: center;
+    padding: clamp(2rem, 7vh, 5.5rem) 0;
     overflow: hidden;
 }
 
@@ -22,6 +25,161 @@
     pointer-events: none;
     z-index: 0;
     filter: blur(60px);
+    animation: heroGlowDrift 14s ease-in-out infinite;
+}
+
+@keyframes heroGlowDrift {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+    50% { transform: translate(-3%, 4%) scale(1.08); opacity: 1; }
+}
+
+/*================ PICK-AND-PLACE ARM (option B) ================*/
+/* One synchronised 11s timeline drives the shoulder, elbow, wrist, gripper
+   and the block together: reach left, grip, lift, carry right, release,
+   return empty. All parts share the same keyframe stops so they stay in
+   step; only the loop restart (100% -> 0%) snaps the block back to start. */
+
+.hero__arm-row {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+}
+
+.hero__arm {
+    width: clamp(300px, 28vw, 400px);
+    height: auto;
+    pointer-events: none;
+    overflow: visible;
+}
+
+.hero__arm .pp-link,
+.hero__arm .pp-joint,
+.hero__arm .pp-finger-l rect,
+.hero__arm .pp-finger-r rect {
+    fill: var(--accent);
+    opacity: 0.55;
+}
+
+.hero__arm .pp-joint--shoulder {
+    opacity: 0.65;
+}
+
+.hero__arm .pp-joint--wrist {
+    opacity: 0.6;
+}
+
+.hero__arm .pp-base,
+.hero__arm .pp-base-lower {
+    fill: var(--accent);
+    opacity: 0.4;
+}
+
+/* Full-strength and undimmed so the block reads as a distinct object the
+   gripper is holding, instead of fusing into the (dimmer) claw it overlaps.
+   Three rects crossfade rather than one rect translating: a block whose
+   position is animated on its own straight-line path visibly drifts off
+   the gripper mid-swing, since the real tip sweeps a curved path (three
+   rotating joints combined). The held copy is nested inside the wrist's
+   own transform chain instead, so it tracks exactly with zero drift. */
+.hero__arm .pp-box {
+    fill: var(--accent);
+}
+
+.hero__arm .pp-box--pick {
+    animation: ppBoxPick 11s ease-in-out infinite;
+}
+
+.hero__arm .pp-box--held {
+    animation: ppBoxHeld 11s ease-in-out infinite;
+}
+
+.hero__arm .pp-box--place {
+    animation: ppBoxPlace 11s ease-in-out infinite;
+}
+
+.hero__arm .pp-j1,
+.hero__arm .pp-j2,
+.hero__arm .pp-j3,
+.hero__arm .pp-finger-l,
+.hero__arm .pp-finger-r {
+    transform-origin: 0 0;
+}
+
+.hero__arm .pp-j1 { animation: ppJoint1 11s ease-in-out infinite; }
+.hero__arm .pp-j2 { animation: ppJoint2 11s ease-in-out infinite; }
+.hero__arm .pp-j3 { animation: ppJoint3 11s ease-in-out infinite; }
+.hero__arm .pp-finger-l { animation: ppFingerL 11s ease-in-out infinite; }
+.hero__arm .pp-finger-r { animation: ppFingerR 11s ease-in-out infinite; }
+
+@keyframes ppJoint1 {
+    0%   { transform: rotate(-15deg); }
+    10%  { transform: rotate(-65deg); }
+    18%, 22% { transform: rotate(-70deg); }
+    30%  { transform: rotate(-40deg); }
+    48%  { transform: rotate(40deg); }
+    58%, 68% { transform: rotate(68deg); }
+    76%  { transform: rotate(40deg); }
+    90%, 100% { transform: rotate(-15deg); }
+}
+
+@keyframes ppJoint2 {
+    0%   { transform: rotate(25deg); }
+    10%  { transform: rotate(70deg); }
+    18%, 22% { transform: rotate(78deg); }
+    30%  { transform: rotate(50deg); }
+    48%  { transform: rotate(-50deg); }
+    58%, 68% { transform: rotate(-75deg); }
+    76%  { transform: rotate(-50deg); }
+    90%, 100% { transform: rotate(25deg); }
+}
+
+@keyframes ppJoint3 {
+    0%   { transform: rotate(-10deg); }
+    10%  { transform: rotate(-35deg); }
+    18%, 22% { transform: rotate(-40deg); }
+    30%  { transform: rotate(-25deg); }
+    48%  { transform: rotate(25deg); }
+    58%, 68% { transform: rotate(38deg); }
+    76%  { transform: rotate(25deg); }
+    90%, 100% { transform: rotate(-10deg); }
+}
+
+@keyframes ppFingerL {
+    0%, 18%  { transform: rotate(-20deg); }
+    22%, 64% { transform: rotate(-4deg); }
+    68%, 100% { transform: rotate(-20deg); }
+}
+
+@keyframes ppFingerR {
+    0%, 18%  { transform: rotate(20deg); }
+    22%, 64% { transform: rotate(4deg); }
+    68%, 100% { transform: rotate(20deg); }
+}
+
+/* Crossfades timed to the gripper: visible on the pick surface until the
+   fingers start closing, gone the instant the held copy takes over. */
+@keyframes ppBoxPick {
+    0%, 16%   { opacity: 1; }
+    22%, 100% { opacity: 0; }
+}
+
+/* Visible only while the fingers are actually closed (22-64%, see
+   ppFingerL/R), fading out as they open to hand off to ppBoxPlace. */
+@keyframes ppBoxHeld {
+    0%, 16%   { opacity: 0; }
+    22%, 64%  { opacity: 1; }
+    70%, 100% { opacity: 0; }
+}
+
+@keyframes ppBoxPlace {
+    0%, 64%   { opacity: 0; }
+    70%, 100% { opacity: 1; }
+}
+
+@media screen and (max-width: 860px) {
+    .hero__arm-row {
+        display: none;
+    }
 }
 
 :root[data-theme="dark"] .hero__glow,
@@ -42,7 +200,8 @@
     display: grid;
     grid-template-columns: 1fr auto;
     align-items: center;
-    gap: clamp(2.5rem, 5vw, 4.5rem);
+    column-gap: clamp(2.5rem, 5vw, 4.5rem);
+    row-gap: 1.25rem;
 }
 
 /* Hero Content Column */

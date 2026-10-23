@@ -8,6 +8,7 @@ import Home from './components/home/Home';
 import Work from './components/work/Work';
 import ProjectDetail from './components/work/ProjectDetail';
 import Qualification from './components/qualification/Qualification';
+import Education from './components/education/Education';
 import Skills from './components/skills/Skills';
 import Contact from './components/contact/Contact';
 import Footer from './components/footer/Footer';
@@ -45,6 +46,7 @@ const HomePage = () => (
   <>
     <Home />
     <Qualification />
+    <Education />
     <Work />
     <Skills />
     <Contact />

@@ -3,6 +3,7 @@ import "./header.css";
 
 const links = [
   { href: "/#experience", label: "Experience" },
+  { href: "/#education", label: "Education" },
   { href: "/#projects", label: "Projects" },
   { href: "/#skills", label: "Skills" },
   { href: "/#contact", label: "Contact" },
