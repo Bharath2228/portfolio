@@ -2,7 +2,10 @@
 
 .hero {
     position: relative;
-    padding: clamp(3.5rem, 7vh, 5.5rem) 0;
+    min-height: calc(100svh - 4rem);
+    display: flex;
+    align-items: center;
+    padding: clamp(2rem, 7vh, 5.5rem) 0;
     overflow: hidden;
 }
 
@@ -22,6 +25,307 @@
     pointer-events: none;
     z-index: 0;
     filter: blur(60px);
+    animation: heroGlowDrift 14s ease-in-out infinite;
+}
+
+@keyframes heroGlowDrift {
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.9; }
+    50% { transform: translate(-3%, 4%) scale(1.08); opacity: 1; }
+}
+
+/*================ FACILITY BACKGROUND SCENE ================*/
+/* A floor plan behind the whole hero: a mobile robot patrols the hallway
+   while the pick-and-place arm (same rig and 11s timeline as before) works
+   in the workshop room. Kept low-contrast throughout - it's texture behind
+   the portrait and name, not a competing foreground element. */
+
+.hero__facility {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.4;
+    overflow: visible;
+}
+
+/* Floor tints so the three rooms read as enclosed spaces at a glance, not
+   just thin outlines - the assembly room is a touch brighter since it's
+   where the actual work happens. */
+.hero__facility .fac-floor {
+    fill: var(--accent);
+    stroke: none;
+}
+
+.hero__facility .fac-floor--office {
+    opacity: 0.05;
+}
+
+.hero__facility .fac-floor--assembly {
+    opacity: 0.08;
+}
+
+.hero__facility .fac-floor--storage {
+    opacity: 0.06;
+}
+
+/* Faint technical-grid texture over the whole plan, for density without
+   adding more shapes to read */
+.hero__facility .fac-grid-line {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 1;
+}
+
+.hero__facility .fac-grid {
+    opacity: 0.12;
+}
+
+/* Interior walls only - no outer boundary box, which ran as distracting
+   vertical bars behind the portrait/name. */
+.hero__facility .fac-wall {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 4;
+    opacity: 0.28;
+    stroke-linecap: round;
+}
+
+/* Office desk and shelving, so that room isn't an empty box */
+.hero__facility .fac-furniture {
+    fill: var(--accent);
+    opacity: 0.22;
+}
+
+.hero__facility .fac-furniture--table {
+    opacity: 0.16;
+}
+
+.hero__facility .fac-furniture--chair {
+    opacity: 0.28;
+}
+
+/* Conveyor belt the arm sets finished parts onto */
+.hero__facility .fac-belt {
+    fill: var(--accent);
+    opacity: 0.18;
+    stroke: var(--accent);
+    stroke-width: 1.5;
+    stroke-opacity: 0.5;
+}
+
+.hero__facility .fac-belt-leg {
+    stroke: var(--accent);
+    stroke-width: 3;
+    opacity: 0.4;
+    stroke-linecap: round;
+}
+
+/* Marching dashes along the belt centreline read as the tread running */
+.hero__facility .fac-belt-ticks {
+    stroke: var(--accent);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-dasharray: 10 8;
+    opacity: 0.5;
+    animation: facBeltRun 1.2s linear infinite;
+}
+
+@keyframes facBeltRun {
+    to { stroke-dashoffset: -18; }
+}
+
+/* Pile of parts waiting next to the one the arm actually animates */
+.hero__facility .fac-pile {
+    fill: var(--accent);
+    opacity: 0.3;
+}
+
+.hero__facility .pp-link,
+.hero__facility .pp-joint,
+.hero__facility .pp-finger-l rect,
+.hero__facility .pp-finger-r rect {
+    fill: var(--accent);
+    opacity: 0.6;
+}
+
+.hero__facility .pp-joint--shoulder {
+    opacity: 0.7;
+}
+
+.hero__facility .pp-joint--wrist {
+    opacity: 0.65;
+}
+
+.hero__facility .pp-base,
+.hero__facility .pp-base-lower {
+    fill: var(--accent);
+    opacity: 0.45;
+}
+
+/* Full-strength relative to the rest of the arm so the block still reads as
+   a distinct held object rather than fusing into the claw it overlaps.
+   Three rects crossfade rather than one rect translating: a block whose
+   position is animated on its own straight-line path visibly drifts off
+   the gripper mid-swing, since the real tip sweeps a curved path (three
+   rotating joints combined). The held copy is nested inside the wrist's
+   own transform chain instead, so it tracks exactly with zero drift. */
+.hero__facility .pp-box {
+    fill: var(--accent);
+}
+
+.hero__facility .pp-box--pick {
+    animation: ppBoxPick 11s ease-in-out infinite;
+}
+
+.hero__facility .pp-box--held {
+    animation: ppBoxHeld 11s ease-in-out infinite;
+}
+
+.hero__facility .pp-box--place {
+    animation: ppBoxPlace 11s ease-in-out infinite;
+}
+
+.hero__facility .pp-j1,
+.hero__facility .pp-j2,
+.hero__facility .pp-j3,
+.hero__facility .pp-finger-l,
+.hero__facility .pp-finger-r {
+    transform-origin: 0 0;
+}
+
+.hero__facility .pp-j1 { animation: ppJoint1 11s ease-in-out infinite; }
+.hero__facility .pp-j2 { animation: ppJoint2 11s ease-in-out infinite; }
+.hero__facility .pp-j3 { animation: ppJoint3 11s ease-in-out infinite; }
+.hero__facility .pp-finger-l { animation: ppFingerL 11s ease-in-out infinite; }
+.hero__facility .pp-finger-r { animation: ppFingerR 11s ease-in-out infinite; }
+
+/* Mobile robots: small top-down 4-wheeled AGVs (chassis, wheels,
+   headlights) rather than vacuum-puck circles, each on its own route and
+   turning to face the way it's actually driving. */
+.hero__facility .fac-bot {
+    transform-origin: 0 0;
+}
+
+.hero__facility .fac-bot--a {
+    animation: facBotPatrolA 9s ease-in-out infinite;
+}
+
+.hero__facility .fac-bot--b {
+    animation: facBotPatrolB 6.5s ease-in-out infinite;
+    animation-delay: -2s;
+}
+
+.hero__facility .fac-bot-chassis {
+    fill: var(--accent);
+    opacity: 0.55;
+}
+
+.hero__facility .fac-bot-wheel {
+    fill: var(--accent);
+    opacity: 0.8;
+}
+
+.hero__facility .fac-bot-light {
+    fill: var(--accent);
+}
+
+/* Bot A: office -> through the door -> drops to y 350, well clear of the
+   arm's work cell -> along the bottom of the floor past the pallets ->
+   turns around -> same route back. */
+@keyframes facBotPatrolA {
+    0%        { transform: translate(70px, 260px) scaleX(1); }
+    16%       { transform: translate(340px, 260px) scaleX(1); }
+    20%       { transform: translate(420px, 350px) scaleX(1); }
+    45%       { transform: translate(830px, 350px) scaleX(1); }
+    50%       { transform: translate(830px, 350px) scaleX(-1); }
+    75%       { transform: translate(420px, 350px) scaleX(-1); }
+    79%       { transform: translate(340px, 260px) scaleX(-1); }
+    95%       { transform: translate(70px, 260px) scaleX(-1); }
+    100%      { transform: translate(70px, 260px) scaleX(1); }
+}
+
+/* Bot B: a short aisle loop in the storage room, just below the pallets -
+   a second vehicle working its own patch, on a different cycle length so
+   it never moves in lockstep with Bot A. */
+@keyframes facBotPatrolB {
+    0%        { transform: translate(680px, 468px) scaleX(1); }
+    48%       { transform: translate(840px, 468px) scaleX(1); }
+    50%       { transform: translate(840px, 468px) scaleX(-1); }
+    98%       { transform: translate(680px, 468px) scaleX(-1); }
+    100%      { transform: translate(680px, 468px) scaleX(1); }
+}
+
+@keyframes ppJoint1 {
+    0%   { transform: rotate(-15deg); }
+    10%  { transform: rotate(-65deg); }
+    18%, 22% { transform: rotate(-70deg); }
+    30%  { transform: rotate(-40deg); }
+    48%  { transform: rotate(40deg); }
+    58%, 68% { transform: rotate(68deg); }
+    76%  { transform: rotate(40deg); }
+    90%, 100% { transform: rotate(-15deg); }
+}
+
+@keyframes ppJoint2 {
+    0%   { transform: rotate(25deg); }
+    10%  { transform: rotate(70deg); }
+    18%, 22% { transform: rotate(78deg); }
+    30%  { transform: rotate(50deg); }
+    48%  { transform: rotate(-50deg); }
+    58%, 68% { transform: rotate(-75deg); }
+    76%  { transform: rotate(-50deg); }
+    90%, 100% { transform: rotate(25deg); }
+}
+
+@keyframes ppJoint3 {
+    0%   { transform: rotate(-10deg); }
+    10%  { transform: rotate(-35deg); }
+    18%, 22% { transform: rotate(-40deg); }
+    30%  { transform: rotate(-25deg); }
+    48%  { transform: rotate(25deg); }
+    58%, 68% { transform: rotate(38deg); }
+    76%  { transform: rotate(25deg); }
+    90%, 100% { transform: rotate(-10deg); }
+}
+
+@keyframes ppFingerL {
+    0%, 18%  { transform: rotate(-20deg); }
+    22%, 64% { transform: rotate(-4deg); }
+    68%, 100% { transform: rotate(-20deg); }
+}
+
+@keyframes ppFingerR {
+    0%, 18%  { transform: rotate(20deg); }
+    22%, 64% { transform: rotate(4deg); }
+    68%, 100% { transform: rotate(20deg); }
+}
+
+/* Crossfades timed to the gripper: visible on the pick surface until the
+   fingers start closing, gone the instant the held copy takes over. */
+@keyframes ppBoxPick {
+    0%, 16%   { opacity: 1; }
+    22%, 100% { opacity: 0; }
+}
+
+/* Visible only while the fingers are actually closed (22-64%, see
+   ppFingerL/R), fading out as they open to hand off to ppBoxPlace. */
+@keyframes ppBoxHeld {
+    0%, 16%   { opacity: 0; }
+    22%, 64%  { opacity: 1; }
+    70%, 100% { opacity: 0; }
+}
+
+@keyframes ppBoxPlace {
+    0%, 64%   { opacity: 0; }
+    70%, 100% { opacity: 1; }
+}
+
+@media screen and (max-width: 860px) {
+    .hero__facility {
+        opacity: 0.2;
+    }
 }
 
 :root[data-theme="dark"] .hero__glow,
@@ -39,18 +343,29 @@
 .hero__container {
     position: relative;
     z-index: 1;
-    display: grid;
-    grid-template-columns: 1fr auto;
-    align-items: center;
-    gap: clamp(2.5rem, 5vw, 4.5rem);
+    display: flex;
+    justify-content: center;
+    /* The background scene's two walls sit left-of-centre and right-of-centre
+       of the full hero width; this nudges the centred photo/name column to
+       sit on the midpoint between them, rather than the hero's true centre. */
+    transform: translateX(5%);
 }
 
-/* Hero Content Column */
+/* Portrait stacked above the name/role/actions, centred as one column
+   against the full-bleed facility scene behind it. */
+.hero__intro {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.75rem;
+    max-width: 580px;
+}
+
 .hero__text {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    max-width: 580px;
+    align-items: center;
 }
 
 /* Professional Role Label */
@@ -94,12 +409,14 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: center;
     gap: 0.75rem;
 }
 
 .hero__socials {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 0.75rem;
 }
 
@@ -145,9 +462,8 @@
 
 .hero__portrait-wrapper {
     position: relative;
-    justify-self: end;
     width: 100%;
-    max-width: clamp(260px, 26vw, 300px);
+    max-width: clamp(210px, 22vw, 270px);
 }
 
 /* Ambient backlight behind the portrait */
@@ -218,18 +534,79 @@
         padding: 2.75rem 0 2.5rem;
     }
 
+    /* The wall-centring nudge only makes sense next to the desktop
+       left/right composition; below this width everything stacks in one
+       column, so keep it truly centred instead of skewed. */
     .hero__container {
-        grid-template-columns: 1fr;
-        gap: 2.25rem;
+        transform: none;
     }
 
     .hero__portrait-wrapper {
-        justify-self: start;
-        max-width: 250px;
-        order: -1;
+        max-width: 150px;
     }
 
-    .hero__text {
+    .hero__intro {
         max-width: 100%;
+    }
+}
+
+/* Short viewports: laptop screens are often wide but not very tall once
+   browser chrome (tabs, bookmarks bar) is subtracted, so the forced
+   near-full-height hero can push the social buttons below the fold on
+   first load. Compact the stack instead of letting that happen - measured
+   against a real 1358x684 laptop viewport where the buttons were cut off. */
+@media screen and (max-height: 760px) {
+    .hero {
+        padding: 1.25rem 0 1rem;
+    }
+
+    .hero__intro {
+        gap: 0.85rem;
+    }
+
+    .hero__portrait-wrapper {
+        max-width: clamp(120px, 13vw, 150px);
+    }
+
+    /* The shell's border radius and padding were sized for the ~270px
+       full-size portrait; at this compact width the same absolute values
+       read as a heavy, over-rounded blob instead of a crisp bezel - scale
+       them down to match. */
+    .hero__portrait-ambient {
+        inset: -8px;
+        border-radius: 1.3rem;
+    }
+
+    .hero__portrait-shell {
+        border-radius: 1rem;
+        padding: 0.4rem;
+    }
+
+    .hero__portrait-figure {
+        border-radius: 0.6rem;
+    }
+
+    .hero__role {
+        font-size: 0.8rem;
+        margin-bottom: 0.4rem;
+    }
+
+    .hero__title {
+        font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+        margin-bottom: 0.4rem;
+    }
+
+    .hero__subtitle {
+        font-size: clamp(0.85rem, 1.1vw, 0.95rem);
+        margin-bottom: 0.75rem;
+    }
+
+    .hero__subtitle span {
+        font-size: 0.8rem;
+    }
+
+    .hero__social-btn {
+        padding: 0.45rem 0.9rem;
+        font-size: 0.8rem;
     }
 }
