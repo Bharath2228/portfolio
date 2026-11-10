@@ -198,6 +198,80 @@
 .tree-node--research .tree-node__card::before { background: #8b5cf6; }
 .tree-node--aerospace .tree-node__card::before { background: #3b82f6; }
 
+/* Card variant that puts a rig photo beside the text instead of above it */
+.tree-node__card--media {
+    display: flex;
+    gap: 1.5rem;
+    align-items: stretch;
+}
+
+.tree-node__content {
+    flex: 1 1 auto;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Optional rig photo linking to a detail page — fills the row's full height
+   so it never leaves dead space below a short image next to tall text. */
+.tree-node__media {
+    display: block;
+    position: relative;
+    flex: 0 0 180px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    align-self: stretch;
+}
+
+.tree-node__media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(0deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0) 45%);
+    pointer-events: none;
+}
+
+.tree-node__thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 62% 15%;
+    display: block;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tree-node__media:hover .tree-node__thumb {
+    transform: scale(1.05);
+}
+
+.tree-node__media-label {
+    position: absolute;
+    left: 0.65rem;
+    right: 0.65rem;
+    bottom: 0.65rem;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.72rem;
+    font-weight: var(--font-medium);
+    color: #fff;
+    line-height: 1.3;
+}
+
+@media screen and (max-width: 640px) {
+    .tree-node__card--media {
+        flex-direction: column;
+    }
+
+    .tree-node__media {
+        flex-basis: auto;
+        width: 100%;
+        height: 190px;
+    }
+}
+
 /* Company / Institution Headline */
 .tree-node__org-title {
     font-size: 1.2rem;

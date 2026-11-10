@@ -1,519 +1,133 @@
-/*================ MINIMALIST EDITORIAL HERO SECTION ================*/
+/*================ HERO ================*/
+/* Fills the first screen on its own - other sections only appear once the
+   visitor scrolls. The portrait is bounded by min(vw, vh) rather than vw
+   alone, so a short-but-wide monitor window can't inflate it and a
+   tall-but-narrow one can't starve it, regardless of how tall this section
+   itself ends up being. */
 
 .hero {
     position: relative;
-    min-height: calc(100svh - 4rem);
+    min-height: calc(100svh - var(--header-height));
     display: flex;
     align-items: center;
-    padding: clamp(2rem, 7vh, 5.5rem) 0;
+    padding: clamp(2rem, 6vh, 4rem) 0;
     overflow: hidden;
 }
 
-/* Subtle Ambient Lighting */
+/* Soft ambient light behind the photo - texture, not a scene */
 .hero__glow {
     position: absolute;
-    top: -80px;
-    right: 5%;
-    width: 600px;
-    height: 600px;
+    top: 50%;
+    right: 8%;
+    width: 46vw;
+    max-width: 620px;
+    aspect-ratio: 1;
+    transform: translateY(-50%);
     background: radial-gradient(
         circle,
-        rgba(6, 182, 212, 0.08) 0%,
-        rgba(59, 130, 246, 0.04) 40%,
-        transparent 70%
+        rgba(96, 165, 250, 0.14) 0%,
+        rgba(96, 165, 250, 0.05) 45%,
+        transparent 72%
     );
     pointer-events: none;
     z-index: 0;
-    filter: blur(60px);
-    animation: heroGlowDrift 14s ease-in-out infinite;
+    filter: blur(10px);
 }
 
-@keyframes heroGlowDrift {
-    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.9; }
-    50% { transform: translate(-3%, 4%) scale(1.08); opacity: 1; }
-}
-
-/*================ FACILITY BACKGROUND SCENE ================*/
-/* A floor plan behind the whole hero: a mobile robot patrols the hallway
-   while the pick-and-place arm (same rig and 11s timeline as before) works
-   in the workshop room. Kept low-contrast throughout - it's texture behind
-   the portrait and name, not a competing foreground element. */
-
-.hero__facility {
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0.4;
-    overflow: visible;
-}
-
-/* Floor tints so the three rooms read as enclosed spaces at a glance, not
-   just thin outlines - the assembly room is a touch brighter since it's
-   where the actual work happens. */
-.hero__facility .fac-floor {
-    fill: var(--accent);
-    stroke: none;
-}
-
-.hero__facility .fac-floor--office {
-    opacity: 0.05;
-}
-
-.hero__facility .fac-floor--assembly {
-    opacity: 0.08;
-}
-
-.hero__facility .fac-floor--storage {
-    opacity: 0.06;
-}
-
-/* Faint technical-grid texture over the whole plan, for density without
-   adding more shapes to read */
-.hero__facility .fac-grid-line {
-    fill: none;
-    stroke: var(--accent);
-    stroke-width: 1;
-}
-
-.hero__facility .fac-grid {
-    opacity: 0.12;
-}
-
-/* Interior walls only - no outer boundary box, which ran as distracting
-   vertical bars behind the portrait/name. */
-.hero__facility .fac-wall {
-    fill: none;
-    stroke: var(--accent);
-    stroke-width: 4;
-    opacity: 0.28;
-    stroke-linecap: round;
-}
-
-/* Office desk and shelving, so that room isn't an empty box */
-.hero__facility .fac-furniture {
-    fill: var(--accent);
-    opacity: 0.22;
-}
-
-.hero__facility .fac-furniture--table {
-    opacity: 0.16;
-}
-
-.hero__facility .fac-furniture--chair {
-    opacity: 0.28;
-}
-
-/* Conveyor belt the arm sets finished parts onto */
-.hero__facility .fac-belt {
-    fill: var(--accent);
-    opacity: 0.18;
-    stroke: var(--accent);
-    stroke-width: 1.5;
-    stroke-opacity: 0.5;
-}
-
-.hero__facility .fac-belt-leg {
-    stroke: var(--accent);
-    stroke-width: 3;
-    opacity: 0.4;
-    stroke-linecap: round;
-}
-
-/* Marching dashes along the belt centreline read as the tread running */
-.hero__facility .fac-belt-ticks {
-    stroke: var(--accent);
-    stroke-width: 2;
-    stroke-linecap: round;
-    stroke-dasharray: 10 8;
-    opacity: 0.5;
-    animation: facBeltRun 1.2s linear infinite;
-}
-
-@keyframes facBeltRun {
-    to { stroke-dashoffset: -18; }
-}
-
-/* Pile of parts waiting next to the one the arm actually animates */
-.hero__facility .fac-pile {
-    fill: var(--accent);
-    opacity: 0.3;
-}
-
-.hero__facility .pp-link,
-.hero__facility .pp-joint,
-.hero__facility .pp-finger-l rect,
-.hero__facility .pp-finger-r rect {
-    fill: var(--accent);
-    opacity: 0.6;
-}
-
-.hero__facility .pp-joint--shoulder {
-    opacity: 0.7;
-}
-
-.hero__facility .pp-joint--wrist {
-    opacity: 0.65;
-}
-
-.hero__facility .pp-base,
-.hero__facility .pp-base-lower {
-    fill: var(--accent);
-    opacity: 0.45;
-}
-
-/* Full-strength relative to the rest of the arm so the block still reads as
-   a distinct held object rather than fusing into the claw it overlaps.
-   Three rects crossfade rather than one rect translating: a block whose
-   position is animated on its own straight-line path visibly drifts off
-   the gripper mid-swing, since the real tip sweeps a curved path (three
-   rotating joints combined). The held copy is nested inside the wrist's
-   own transform chain instead, so it tracks exactly with zero drift. */
-.hero__facility .pp-box {
-    fill: var(--accent);
-}
-
-.hero__facility .pp-box--pick {
-    animation: ppBoxPick 11s ease-in-out infinite;
-}
-
-.hero__facility .pp-box--held {
-    animation: ppBoxHeld 11s ease-in-out infinite;
-}
-
-.hero__facility .pp-box--place {
-    animation: ppBoxPlace 11s ease-in-out infinite;
-}
-
-.hero__facility .pp-j1,
-.hero__facility .pp-j2,
-.hero__facility .pp-j3,
-.hero__facility .pp-finger-l,
-.hero__facility .pp-finger-r {
-    transform-origin: 0 0;
-}
-
-.hero__facility .pp-j1 { animation: ppJoint1 11s ease-in-out infinite; }
-.hero__facility .pp-j2 { animation: ppJoint2 11s ease-in-out infinite; }
-.hero__facility .pp-j3 { animation: ppJoint3 11s ease-in-out infinite; }
-.hero__facility .pp-finger-l { animation: ppFingerL 11s ease-in-out infinite; }
-.hero__facility .pp-finger-r { animation: ppFingerR 11s ease-in-out infinite; }
-
-/* Mobile robots: small top-down 4-wheeled AGVs (chassis, wheels,
-   headlights) rather than vacuum-puck circles, each on its own route and
-   turning to face the way it's actually driving. */
-.hero__facility .fac-bot {
-    transform-origin: 0 0;
-}
-
-.hero__facility .fac-bot--a {
-    animation: facBotPatrolA 9s ease-in-out infinite;
-}
-
-.hero__facility .fac-bot--b {
-    animation: facBotPatrolB 6.5s ease-in-out infinite;
-    animation-delay: -2s;
-}
-
-.hero__facility .fac-bot-chassis {
-    fill: var(--accent);
-    opacity: 0.55;
-}
-
-.hero__facility .fac-bot-wheel {
-    fill: var(--accent);
-    opacity: 0.8;
-}
-
-.hero__facility .fac-bot-light {
-    fill: var(--accent);
-}
-
-/* Bot A: office -> through the door -> drops to y 350, well clear of the
-   arm's work cell -> along the bottom of the floor past the pallets ->
-   turns around -> same route back. */
-@keyframes facBotPatrolA {
-    0%        { transform: translate(70px, 260px) scaleX(1); }
-    16%       { transform: translate(340px, 260px) scaleX(1); }
-    20%       { transform: translate(420px, 350px) scaleX(1); }
-    45%       { transform: translate(830px, 350px) scaleX(1); }
-    50%       { transform: translate(830px, 350px) scaleX(-1); }
-    75%       { transform: translate(420px, 350px) scaleX(-1); }
-    79%       { transform: translate(340px, 260px) scaleX(-1); }
-    95%       { transform: translate(70px, 260px) scaleX(-1); }
-    100%      { transform: translate(70px, 260px) scaleX(1); }
-}
-
-/* Bot B: a short aisle loop in the storage room, just below the pallets -
-   a second vehicle working its own patch, on a different cycle length so
-   it never moves in lockstep with Bot A. */
-@keyframes facBotPatrolB {
-    0%        { transform: translate(680px, 468px) scaleX(1); }
-    48%       { transform: translate(840px, 468px) scaleX(1); }
-    50%       { transform: translate(840px, 468px) scaleX(-1); }
-    98%       { transform: translate(680px, 468px) scaleX(-1); }
-    100%      { transform: translate(680px, 468px) scaleX(1); }
-}
-
-@keyframes ppJoint1 {
-    0%   { transform: rotate(-15deg); }
-    10%  { transform: rotate(-65deg); }
-    18%, 22% { transform: rotate(-70deg); }
-    30%  { transform: rotate(-40deg); }
-    48%  { transform: rotate(40deg); }
-    58%, 68% { transform: rotate(68deg); }
-    76%  { transform: rotate(40deg); }
-    90%, 100% { transform: rotate(-15deg); }
-}
-
-@keyframes ppJoint2 {
-    0%   { transform: rotate(25deg); }
-    10%  { transform: rotate(70deg); }
-    18%, 22% { transform: rotate(78deg); }
-    30%  { transform: rotate(50deg); }
-    48%  { transform: rotate(-50deg); }
-    58%, 68% { transform: rotate(-75deg); }
-    76%  { transform: rotate(-50deg); }
-    90%, 100% { transform: rotate(25deg); }
-}
-
-@keyframes ppJoint3 {
-    0%   { transform: rotate(-10deg); }
-    10%  { transform: rotate(-35deg); }
-    18%, 22% { transform: rotate(-40deg); }
-    30%  { transform: rotate(-25deg); }
-    48%  { transform: rotate(25deg); }
-    58%, 68% { transform: rotate(38deg); }
-    76%  { transform: rotate(25deg); }
-    90%, 100% { transform: rotate(-10deg); }
-}
-
-@keyframes ppFingerL {
-    0%, 18%  { transform: rotate(-20deg); }
-    22%, 64% { transform: rotate(-4deg); }
-    68%, 100% { transform: rotate(-20deg); }
-}
-
-@keyframes ppFingerR {
-    0%, 18%  { transform: rotate(20deg); }
-    22%, 64% { transform: rotate(4deg); }
-    68%, 100% { transform: rotate(20deg); }
-}
-
-/* Crossfades timed to the gripper: visible on the pick surface until the
-   fingers start closing, gone the instant the held copy takes over. */
-@keyframes ppBoxPick {
-    0%, 16%   { opacity: 1; }
-    22%, 100% { opacity: 0; }
-}
-
-/* Visible only while the fingers are actually closed (22-64%, see
-   ppFingerL/R), fading out as they open to hand off to ppBoxPlace. */
-@keyframes ppBoxHeld {
-    0%, 16%   { opacity: 0; }
-    22%, 64%  { opacity: 1; }
-    70%, 100% { opacity: 0; }
-}
-
-@keyframes ppBoxPlace {
-    0%, 64%   { opacity: 0; }
-    70%, 100% { opacity: 1; }
-}
-
-@media screen and (max-width: 860px) {
-    .hero__facility {
-        opacity: 0.2;
-    }
-}
-
-:root[data-theme="dark"] .hero__glow,
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) .hero__glow {
-        background: radial-gradient(
-            circle,
-            rgba(6, 182, 212, 0.12) 0%,
-            rgba(59, 130, 246, 0.06) 45%,
-            transparent 70%
-        );
-    }
-}
+/*================ LAYOUT: TEXT LEFT, PORTRAIT RIGHT ================*/
 
 .hero__container {
     position: relative;
     z-index: 1;
     display: flex;
-    justify-content: center;
-    /* The background scene's two walls sit left-of-centre and right-of-centre
-       of the full hero width; this nudges the centred photo/name column to
-       sit on the midpoint between them, rather than the hero's true centre. */
-    transform: translateX(5%);
-}
-
-/* Portrait stacked above the name/role/actions, centred as one column
-   against the full-bleed facility scene behind it. */
-.hero__intro {
-    display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
-    gap: 1.75rem;
-    max-width: 580px;
+    justify-content: space-between;
+    gap: clamp(2rem, 5vw, 4.5rem);
 }
 
 .hero__text {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
+    text-align: left;
+    flex: 1 1 420px;
+    min-width: 0;
+    max-width: 480px;
 }
 
-/* Professional Role Label */
-.hero__role {
-    font-size: var(--small-font-size);
-    font-weight: var(--font-medium);
-    color: var(--accent);
-    letter-spacing: 0.02em;
-    margin-bottom: 0.75rem;
-}
-
-/* Headline - Balanced Sweet Spot */
-.hero__title {
-    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
-    line-height: 1.08;
+.hero__name {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    line-height: 1.05;
     letter-spacing: -0.03em;
     font-weight: var(--font-semi-bold);
     color: var(--title-color);
-    margin-bottom: 0.85rem;
+    margin-bottom: 0.6rem;
 }
 
-/* Subtitle - Academic Affiliation */
+.hero__role {
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    font-weight: var(--font-medium);
+    color: var(--accent);
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+}
+
 .hero__subtitle {
-    font-size: clamp(1rem, 1.35vw, 1.15rem);
-    line-height: 1.5;
-    color: var(--title-color);
-    font-weight: var(--font-normal);
-    opacity: 0.9;
-    margin-bottom: 2rem;
-}
-
-.hero__subtitle span {
-    font-size: clamp(0.875rem, 1.2vw, 0.975rem);
+    font-size: 1rem;
+    line-height: 1.6;
     color: var(--text-color);
-    display: inline-block;
-    margin-top: 0.2rem;
+    max-width: 36ch;
+    margin-bottom: 2.25rem;
 }
 
-/* Social Buttons Row */
-.hero__actions {
+/*================ LINKS: PLAIN, NOT PILL BUTTONS ================*/
+
+.hero__links {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
+    gap: 0.5rem 1.75rem;
 }
 
-.hero__socials {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 0.75rem;
-}
-
-.hero__social-btn {
+.hero__link {
     display: inline-flex;
     align-items: center;
     gap: 0.45rem;
-    padding: 0.6rem 1.15rem;
-    border-radius: 9999px;
-    background: var(--container-color);
-    border: 1px solid var(--border-color);
+    padding-bottom: 0.25rem;
     color: var(--title-color);
-    font-size: var(--small-font-size);
+    font-size: 0.95rem;
     font-weight: var(--font-medium);
-    text-decoration: none;
-    box-shadow: 0 1px 4px var(--shadow-color);
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s ease, color 0.2s ease;
 }
 
-.hero__social-btn i {
-    font-size: 1.05rem;
+.hero__link i {
+    font-size: 1.1rem;
     color: var(--accent);
-    transition: transform 0.2s ease;
 }
 
-.hero__social-btn:hover {
-    color: var(--title-color);
-    border-color: rgba(148, 163, 184, 0.45);
-    background: rgba(148, 163, 184, 0.08);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px var(--shadow-color);
+.hero__link:hover {
+    border-bottom-color: var(--accent);
 }
 
-.hero__social-btn:hover i {
-    transform: scale(1.15);
+.hero__link:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 2px;
 }
 
-.hero__social-btn:active {
-    transform: scale(0.98);
-}
+/*================ PORTRAIT ================*/
+/* Bounded by min(vw, vh) rather than vw alone, so an unusually short-but-
+   wide window (external monitor, browser not maximised) can't inflate it,
+   and an unusually tall-but-narrow one can't starve it - the two failure
+   modes that made fixed breakpoints feel wrong on different screens. */
 
-/*================ PORTRAIT: DOUBLE-BEZEL FRAME ================*/
-
-.hero__portrait-wrapper {
+.hero__portrait {
     position: relative;
-    width: 100%;
-    max-width: clamp(210px, 22vw, 270px);
-}
-
-/* Ambient backlight behind the portrait */
-.hero__portrait-ambient {
-    position: absolute;
-    inset: -14px;
-    border-radius: 2rem;
-    background: radial-gradient(
-        circle,
-        rgba(6, 182, 212, 0.18) 0%,
-        rgba(59, 130, 246, 0.1) 45%,
-        transparent 75%
-    );
-    filter: blur(24px);
-    z-index: 0;
-    pointer-events: none;
-    opacity: 0.7;
-    transition: opacity 0.3s ease;
-}
-
-.hero__portrait-wrapper:hover .hero__portrait-ambient {
-    opacity: 0.95;
-}
-
-/* Outer Machined Shell */
-.hero__portrait-shell {
-    position: relative;
-    z-index: 1;
-    background: var(--container-color);
-    border: 1px solid var(--border-color);
-    border-radius: 1.75rem;
-    padding: 0.65rem;
-    box-shadow: 0 16px 36px var(--shadow-color);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.hero__portrait-wrapper:hover .hero__portrait-shell {
-    border-color: rgba(148, 163, 184, 0.35);
-    transform: translateY(-3px);
-    box-shadow: 0 22px 48px var(--shadow-color);
-}
-
-/* Inner Photo Figure */
-.hero__portrait-figure {
-    margin: 0;
-    overflow: hidden;
-    border-radius: calc(1.75rem - 0.65rem);
-    background: #141a24;
+    flex: 0 0 auto;
+    width: clamp(200px, min(30vw, 46vh), 400px);
     aspect-ratio: 4 / 5;
-    position: relative;
+    background: #141a24;
 }
 
 .hero__portrait-img {
@@ -521,92 +135,128 @@
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 0.75rem;
+    filter: saturate(0.92) contrast(1.03);
+    box-shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.55);
 }
 
-.hero__portrait-wrapper:hover .hero__portrait-img {
-    transform: scale(1.03);
+/*================ SCROLL CUE ================*/
+/* Fixed to the viewport rather than the hero section, so it stays visible
+   on screen even if the hero's own content runs taller than the window -
+   and fades out once the visitor actually scrolls, instead of lingering. */
+
+.hero__scroll-cue {
+    position: fixed;
+    z-index: var(--z-fixed);
+    left: 50%;
+    bottom: 1.5rem;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.3rem;
+    color: var(--text-color);
+    font-size: var(--smaller-font-size);
+    opacity: 0.8;
+    animation: heroScrollBob 2.2s ease-in-out infinite;
+    transition: opacity 0.25s ease, color 0.2s ease, visibility 0.25s ease;
 }
 
-/* Responsive adjustments */
+.hero__scroll-cue--hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.hero__scroll-cue:hover {
+    opacity: 1;
+    color: var(--accent);
+}
+
+.hero__scroll-cue i {
+    font-size: 1.1rem;
+}
+
+@keyframes heroScrollBob {
+    0%, 100% { transform: translate(-50%, 0); }
+    50%      { transform: translate(-50%, 6px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero__scroll-cue {
+        animation: none;
+    }
+}
+
+@media screen and (max-height: 500px) {
+    .hero__scroll-cue {
+        display: none;
+    }
+}
+
+/*================ RESPONSIVE ================*/
+
 @media screen and (max-width: 860px) {
     .hero {
-        padding: 2.75rem 0 2.5rem;
+        padding: 2.5rem 0 2.25rem;
     }
 
-    /* The wall-centring nudge only makes sense next to the desktop
-       left/right composition; below this width everything stacks in one
-       column, so keep it truly centred instead of skewed. */
+    .hero__glow {
+        right: 50%;
+        transform: translate(50%, -50%);
+    }
+
     .hero__container {
-        transform: none;
+        flex-direction: column-reverse;
+        gap: 2rem;
     }
 
-    .hero__portrait-wrapper {
-        max-width: 150px;
-    }
-
-    .hero__intro {
+    .hero__text {
+        align-items: center;
+        text-align: center;
         max-width: 100%;
-    }
-}
-
-/* Short viewports: laptop screens are often wide but not very tall once
-   browser chrome (tabs, bookmarks bar) is subtracted, so the forced
-   near-full-height hero can push the social buttons below the fold on
-   first load. Compact the stack instead of letting that happen - measured
-   against a real 1358x684 laptop viewport where the buttons were cut off. */
-@media screen and (max-height: 760px) {
-    .hero {
-        padding: 1.25rem 0 1rem;
-    }
-
-    .hero__intro {
-        gap: 0.85rem;
-    }
-
-    .hero__portrait-wrapper {
-        max-width: clamp(120px, 13vw, 150px);
-    }
-
-    /* The shell's border radius and padding were sized for the ~270px
-       full-size portrait; at this compact width the same absolute values
-       read as a heavy, over-rounded blob instead of a crisp bezel - scale
-       them down to match. */
-    .hero__portrait-ambient {
-        inset: -8px;
-        border-radius: 1.3rem;
-    }
-
-    .hero__portrait-shell {
-        border-radius: 1rem;
-        padding: 0.4rem;
-    }
-
-    .hero__portrait-figure {
-        border-radius: 0.6rem;
-    }
-
-    .hero__role {
-        font-size: 0.8rem;
-        margin-bottom: 0.4rem;
-    }
-
-    .hero__title {
-        font-size: clamp(1.6rem, 3.2vw, 2.3rem);
-        margin-bottom: 0.4rem;
     }
 
     .hero__subtitle {
-        font-size: clamp(0.85rem, 1.1vw, 0.95rem);
-        margin-bottom: 0.75rem;
+        max-width: 42ch;
     }
 
-    .hero__subtitle span {
-        font-size: 0.8rem;
+    .hero__links {
+        justify-content: center;
     }
 
-    .hero__social-btn {
-        padding: 0.45rem 0.9rem;
-        font-size: 0.8rem;
+    .hero__portrait {
+        width: clamp(180px, min(55vw, 42vh), 280px);
+    }
+
+    .hero__scroll-cue {
+        bottom: 0.65rem;
+        font-size: 0.7rem;
+    }
+
+    .hero__scroll-cue i {
+        font-size: 0.95rem;
+    }
+}
+
+/* Short viewports: compact the stack so the links row doesn't fall below
+   the fold on a wide-but-short laptop window. */
+@media screen and (max-height: 700px) {
+    .hero {
+        padding: 1.5rem 0 1.25rem;
+    }
+
+    .hero__name {
+        font-size: clamp(2rem, 4vw, 2.75rem);
+        margin-bottom: 0.4rem;
+    }
+
+    .hero__role {
+        font-size: 1.05rem;
+        margin-bottom: 0.85rem;
+    }
+
+    .hero__subtitle {
+        margin-bottom: 1.25rem;
     }
 }

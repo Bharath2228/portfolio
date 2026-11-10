@@ -8,6 +8,7 @@ import Home from './components/home/Home';
 import Work from './components/work/Work';
 import ProjectDetail from './components/work/ProjectDetail';
 import Qualification from './components/qualification/Qualification';
+import ExperienceDetail from './components/qualification/ExperienceDetail';
 import Education from './components/education/Education';
 import Skills from './components/skills/Skills';
 import Contact from './components/contact/Contact';
@@ -64,6 +65,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/projects/:id" element={<ProjectDetail />} />
+          <Route path="/experience/:id" element={<ExperienceDetail />} />
         </Routes>
       </main>
 
