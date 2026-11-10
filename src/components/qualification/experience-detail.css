@@ -1,0 +1,119 @@
+.experience-detail {
+    max-width: 720px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.experience-detail__back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--accent);
+    font-size: var(--small-font-size);
+    font-weight: var(--font-medium);
+    margin-bottom: 1.5rem;
+    width: fit-content;
+}
+
+.experience-detail__back:hover {
+    color: var(--accent-hover);
+}
+
+.experience-detail__media {
+    width: 100%;
+    border-radius: 0.85rem;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    margin-bottom: 1.5rem;
+}
+
+.experience-detail__img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.experience-detail__meta {
+    font-size: var(--small-font-size);
+    color: var(--text-color);
+    margin-bottom: 0.4rem;
+}
+
+.experience-detail__title {
+    font-size: clamp(1.5rem, 3vw, 2.1rem);
+    font-weight: var(--font-semi-bold);
+    color: var(--title-color);
+    line-height: 1.25;
+    margin-bottom: 0.35rem;
+}
+
+.experience-detail__role {
+    font-size: var(--small-font-size);
+    font-weight: var(--font-medium);
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.experience-detail__description {
+    color: var(--text-color);
+    font-size: 1.05rem;
+    margin-bottom: 1.25rem;
+}
+
+.experience-detail__subhead {
+    font-size: var(--normal-font-size);
+    font-weight: var(--font-semi-bold);
+    color: var(--title-color);
+    margin: 1rem 0 1rem;
+}
+
+.experience-detail__points {
+    display: grid;
+    gap: 0.55rem;
+    padding-left: 1.15rem;
+    margin: 0 0 1.5rem 0;
+    list-style: disc;
+    font-size: var(--small-font-size);
+    color: var(--text-color);
+    line-height: 1.55;
+}
+
+.experience-detail__points li::marker {
+    color: var(--accent);
+}
+
+.experience-detail__annotations {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.experience-detail__annotation dt {
+    font-size: var(--small-font-size);
+    font-weight: var(--font-semi-bold);
+    color: var(--title-color);
+    margin-bottom: 0.25rem;
+}
+
+.experience-detail__annotation dd {
+    font-size: var(--small-font-size);
+    color: var(--text-color);
+    line-height: 1.55;
+    margin: 0;
+}
+
+.experience-detail__tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-bottom: 1.5rem;
+}
+
+.experience-detail__tags li {
+    font-size: var(--small-font-size);
+    color: var(--title-color);
+    border: 1px solid var(--border-color);
+    border-radius: 999px;
+    padding: 0.35rem 0.85rem;
+}

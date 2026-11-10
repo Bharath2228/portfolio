@@ -1,5 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import "./timeline.css";
+import WlriCellThumb from "../../assets/wlri-cobot-arm.jpg";
 
 const treeNodes = [
   {
@@ -18,6 +20,8 @@ const treeNodes = [
       "Deployed a pick-and-place application with 80+ taught waypoints, syncing gripper I/O with an analog distance sensor for object detection",
     ],
     tags: ["ROS 2", "ros2_control", "MoveIt 2", "C++", "Kinematics", "7-DoF Cobot", "Pick & Place"],
+    thumbnail: WlriCellThumb,
+    detailHref: "/experience/work-life-robotics",
   },
   {
     id: "biomechanics-inst",
@@ -119,25 +123,41 @@ export const Qualification = () => {
                 </div>
 
                 {/* Right Column: Node Information Card */}
-                <article className="tree-node__card">
-                  <h3 className="tree-node__org-title">{node.org}</h3>
-                  <p className="tree-node__role-name">{node.role}</p>
-
-                  {node.points.length > 0 && (
-                    <ul className="tree-node__points">
-                      {node.points.map((point) => (
-                        <li key={point}>{point}</li>
-                      ))}
-                    </ul>
+                <article className={`tree-node__card${node.thumbnail ? " tree-node__card--media" : ""}`}>
+                  {node.thumbnail && node.detailHref && (
+                    <Link to={node.detailHref} className="tree-node__media">
+                      <img
+                        src={node.thumbnail}
+                        alt={`${node.org} robot cell`}
+                        className="tree-node__thumb"
+                        loading="lazy"
+                      />
+                      <span className="tree-node__media-label">
+                        View the robot cell <i className="bx bx-right-arrow-alt" aria-hidden="true"></i>
+                      </span>
+                    </Link>
                   )}
 
-                  {node.tags && node.tags.length > 0 && (
-                    <div className="tree-node__tags" aria-label="Technologies used">
-                      {node.tags.map((tag) => (
-                        <span className="tree-tag" key={tag}>{tag}</span>
-                      ))}
-                    </div>
-                  )}
+                  <div className="tree-node__content">
+                    <h3 className="tree-node__org-title">{node.org}</h3>
+                    <p className="tree-node__role-name">{node.role}</p>
+
+                    {node.points.length > 0 && (
+                      <ul className="tree-node__points">
+                        {node.points.map((point) => (
+                          <li key={point}>{point}</li>
+                        ))}
+                      </ul>
+                    )}
+
+                    {node.tags && node.tags.length > 0 && (
+                      <div className="tree-node__tags" aria-label="Technologies used">
+                        {node.tags.map((tag) => (
+                          <span className="tree-tag" key={tag}>{tag}</span>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 </article>
               </li>
             );
